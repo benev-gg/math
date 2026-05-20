@@ -56,7 +56,7 @@ export class Vec2 implements Xy {
 		)
 	}
 
-	static fromAngle(radians: number) {
+	static rotation(radians: number) {
 		return new this(
 			Math.cos(radians),
 			Math.sin(radians),
