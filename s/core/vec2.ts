@@ -305,6 +305,13 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
+	scale(coefficient: number) {
+		this.x *= coefficient
+		this.y *= coefficient
+		return this
+	}
+
+	/** mutator */
 	divBy(divisor: number) {
 		if (divisor === 0) return this
 		this.x /= divisor

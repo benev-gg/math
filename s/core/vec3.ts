@@ -350,6 +350,14 @@ export class Vec3 {
 	}
 
 	/** mutator */
+	scale(delta: number) {
+		this.x *= delta
+		this.y *= delta
+		this.z *= delta
+		return this
+	}
+
+	/** mutator */
 	divBy(divisor: number) {
 		if (divisor === 0) return this
 		this.x /= divisor
