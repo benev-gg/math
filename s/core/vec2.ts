@@ -4,6 +4,16 @@ import {Scalar} from "./scalar.js"
 export type XyArray = [x: number, y: number]
 export type Xy = {x: number, y: number}
 
+export const index2d = (extent: Xy, vec: Xy) => {
+	return (vec.y * extent.x) + vec.x
+}
+
+export const unindex2d = (extent: Xy, index: number) => {
+	const x = index % extent.x
+	const y = Math.floor(index / extent.x)
+	return new Vec2(x, y)
+}
+
 export class Vec2 implements Xy {
 	constructor(
 		public x = 0,
