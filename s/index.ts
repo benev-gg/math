@@ -6,6 +6,7 @@ export * from "./core/scalar.js"
 export * from "./core/vec2.js"
 export * from "./core/vec3.js"
 export * from "./core/vec4.js"
+export * from "./core/mat4.js"
 
 export * from "./tools/angles.js"
 export * from "./tools/crypto-random.js"
