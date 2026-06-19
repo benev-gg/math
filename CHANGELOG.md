@@ -13,6 +13,7 @@
 ### v0.4.0
 - 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
 - 🟥 rename `Vec2.fromAngle` to `Vec2.rotation`
+- 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
 
 
 
