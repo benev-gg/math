@@ -1,5 +1,5 @@
 
-import {Xyzw} from "./quat.js"
+import {Quat, Xyzw} from "./quat.js"
 import {Vec3, type Xyz} from "./vec3.js"
 
 export type Mat4Array = [
@@ -8,6 +8,38 @@ export type Mat4Array = [
 	number, number, number, number,
 	number, number, number, number,
 ]
+
+export function matrixCompose<A extends Mat4Array | Float32Array>(matrix: A, translation: Xyz, rotation: Xyzw, scale: Xyz) {
+	const {x, y, z, w} = rotation
+	const sx = scale.x, sy = scale.y, sz = scale.z
+
+	const x2 = x + x, y2 = y + y, z2 = z + z
+	const xx = x * x2, xy = x * y2, xz = x * z2
+	const yy = y * y2, yz = y * z2, zz = z * z2
+	const wx = w * x2, wy = w * y2, wz = w * z2
+
+	matrix[0] = (1 - (yy + zz)) * sx
+	matrix[1] = (xy + wz) * sx
+	matrix[2] = (xz - wy) * sx
+	matrix[3] = 0
+
+	matrix[4] = (xy - wz) * sy
+	matrix[5] = (1 - (xx + zz)) * sy
+	matrix[6] = (yz + wx) * sy
+	matrix[7] = 0
+
+	matrix[8] = (xz + wy) * sz
+	matrix[9] = (yz - wx) * sz
+	matrix[10] = (1 - (xx + yy)) * sz
+	matrix[11] = 0
+
+	matrix[12] = translation.x
+	matrix[13] = translation.y
+	matrix[14] = translation.z
+	matrix[15] = 1
+
+	return matrix
+}
 
 export class Mat4 {
 	constructor(
@@ -56,6 +88,10 @@ export class Mat4 {
 			xz - wy,     yz + wx,     1 - xx - yy, 0,
 			0,           0,           0,           1,
 		])
+	}
+
+	static compose(translation: Vec3, rotation: Quat, scale: Vec3) {
+		return new this(matrixCompose(this.identityArray(), translation, rotation, scale))
 	}
 
 	dup() {
