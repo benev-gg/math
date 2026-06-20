@@ -9,7 +9,23 @@ export type Mat4Array = [
 	number, number, number, number,
 ]
 
-export function matrixCompose<A extends Mat4Array | Float32Array>(matrix: A, translation: Xyz, rotation: Xyzw, scale: Xyz) {
+export function matrix4Compose(
+		translation: Xyz,
+		rotation: Xyzw,
+		scale: Xyz,
+	) {
+	const matrix = Mat4.identityArray()
+	matrix4ComposeInPlace(matrix, translation, rotation, scale)
+	return matrix
+}
+
+export function matrix4ComposeInPlace(
+		matrix: Mat4Array | Float32Array,
+		translation: Xyz,
+		rotation: Xyzw,
+		scale: Xyz,
+	) {
+
 	const {x, y, z, w} = rotation
 	const sx = scale.x, sy = scale.y, sz = scale.z
 
@@ -37,8 +53,6 @@ export function matrixCompose<A extends Mat4Array | Float32Array>(matrix: A, tra
 	matrix[13] = translation.y
 	matrix[14] = translation.z
 	matrix[15] = 1
-
-	return matrix
 }
 
 export class Mat4 {
@@ -91,7 +105,7 @@ export class Mat4 {
 	}
 
 	static compose(translation: Vec3, rotation: Quat, scale: Vec3) {
-		return new this(matrixCompose(this.identityArray(), translation, rotation, scale))
+		return new this(matrix4Compose(translation, rotation, scale))
 	}
 
 	dup() {
