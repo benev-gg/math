@@ -2,7 +2,6 @@
 export * from "./core/basics.js"
 export * from "./core/circular.js"
 export * from "./core/quat.js"
-export * from "./core/scalar.js"
 export * from "./core/vec2.js"
 export * from "./core/vec3.js"
 export * from "./core/vec4.js"

@@ -12,6 +12,7 @@
 
 ### v0.4.0
 - 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
+- 🟥 delete `Scalar` class in favor of a bunch of basic standalone fns
 - 🟥 rename `Vec2.fromAngle` to `Vec2.rotation`
 - 🟥 renames:
   - `XyArray` -> `Tuple2`

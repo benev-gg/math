@@ -1,10 +1,35 @@
 
 export const {min, max, abs, sign, floor, ceil, pow} = Math
 
+export function sum(...numbers: number[]) {
+	let x = 0
+	for (const n of numbers)
+		x += n
+	return x
+}
+
+export function between(x: number, a = 0, b = 1) {
+	const small = Math.min(a, b)
+	const big = Math.max(a, b)
+	return (x >= small) && (x <= big)
+}
+
 export function clamp(x: number, a: number = 0, b: number = 1) {
 	x = min(x, b)
 	x = max(x, a)
 	return x
+}
+
+export function atLeast(x: number, least = 0) {
+	return Math.max(x, least)
+}
+
+export function atMost(x: number, most = 1) {
+	return Math.min(x, most)
+}
+
+export function distance(x: number, y: number) {
+	return Math.abs(x - y)
 }
 
 export function wrap(x: number, a: number = 0, b: number = 1) {
