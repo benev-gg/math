@@ -1,26 +1,10 @@
 
+import {Tuple16} from "./tuples.js"
 import {Quat, Xyzw} from "./quat.js"
 import {Vec3, type Xyz} from "./vec3.js"
 
-export type Mat4Array = [
-	number, number, number, number,
-	number, number, number, number,
-	number, number, number, number,
-	number, number, number, number,
-]
-
-export function matrix4Compose(
-		translation: Xyz,
-		rotation: Xyzw,
-		scale: Xyz,
-	) {
-	const matrix = Mat4.identityArray()
-	matrix4ComposeInPlace(matrix, translation, rotation, scale)
-	return matrix
-}
-
-export function matrix4ComposeInPlace(
-		matrix: Mat4Array | Float32Array,
+export function compose(
+		buffer: Float32Array | Tuple16,
 		translation: Xyz,
 		rotation: Xyzw,
 		scale: Xyz,
@@ -34,51 +18,51 @@ export function matrix4ComposeInPlace(
 	const yy = y * y2, yz = y * z2, zz = z * z2
 	const wx = w * x2, wy = w * y2, wz = w * z2
 
-	matrix[0] = (1 - (yy + zz)) * sx
-	matrix[1] = (xy + wz) * sx
-	matrix[2] = (xz - wy) * sx
-	matrix[3] = 0
+	buffer[0] = (1 - (yy + zz)) * sx
+	buffer[1] = (xy + wz) * sx
+	buffer[2] = (xz - wy) * sx
+	buffer[3] = 0
 
-	matrix[4] = (xy - wz) * sy
-	matrix[5] = (1 - (xx + zz)) * sy
-	matrix[6] = (yz + wx) * sy
-	matrix[7] = 0
+	buffer[4] = (xy - wz) * sy
+	buffer[5] = (1 - (xx + zz)) * sy
+	buffer[6] = (yz + wx) * sy
+	buffer[7] = 0
 
-	matrix[8] = (xz + wy) * sz
-	matrix[9] = (yz - wx) * sz
-	matrix[10] = (1 - (xx + yy)) * sz
-	matrix[11] = 0
+	buffer[8] = (xz + wy) * sz
+	buffer[9] = (yz - wx) * sz
+	buffer[10] = (1 - (xx + yy)) * sz
+	buffer[11] = 0
 
-	matrix[12] = translation.x
-	matrix[13] = translation.y
-	matrix[14] = translation.z
-	matrix[15] = 1
+	buffer[12] = translation.x
+	buffer[13] = translation.y
+	buffer[14] = translation.z
+	buffer[15] = 1
+}
+
+export function mat4Buffer() {
+	return new Float32Array([
+		1, 0, 0, 0,
+		0, 1, 0, 0,
+		0, 0, 1, 0,
+		0, 0, 0, 1,
+	])
 }
 
 export class Mat4 {
-	constructor(
-		public array: Mat4Array = Mat4.identityArray(),
-	) {}
+	constructor(public buffer = mat4Buffer()) {}
 
-	static new(array?: Mat4Array) {
-		return new this(array)
+	static new(buffer = mat4Buffer()) {
+		return new this(buffer)
 	}
 
-	static identityArray(): Mat4Array {
-		return [
-			1, 0, 0, 0,
-			0, 1, 0, 0,
-			0, 0, 1, 0,
-			0, 0, 0, 1,
-		]
+	static from(tuple: ArrayLike<number>) {
+		return new this(new Float32Array(tuple))
 	}
 
-	static identity() {
-		return new this()
-	}
-
-	static from(array: Mat4Array) {
-		return new this([...array] as Mat4Array)
+	static compose(translation: Vec3, rotation: Quat, scale: Vec3) {
+		const mat = new this()
+		compose(mat.buffer, translation, rotation, scale)
+		return mat
 	}
 
 	static fromQuat({x, y, z, w}: Xyzw) {
@@ -96,7 +80,7 @@ export class Mat4 {
 		const wy = w * y2
 		const wz = w * z2
 
-		return new this([
+		return this.from([
 			1 - yy - zz, xy - wz,     xz + wy,     0,
 			xy + wz,     1 - xx - zz, yz - wx,     0,
 			xz - wy,     yz + wx,     1 - xx - yy, 0,
@@ -104,42 +88,43 @@ export class Mat4 {
 		])
 	}
 
-	static compose(translation: Vec3, rotation: Quat, scale: Vec3) {
-		return new this(matrix4Compose(translation, rotation, scale))
-	}
-
 	dup() {
-		return new Mat4([...this.array] as Mat4Array)
+		return new Mat4(this.buffer.slice())
 	}
 
 	*[Symbol.iterator]() {
-		yield* this.array
+		yield* this.buffer
+	}
+
+	tuple() {
+		return [...this.buffer]
 	}
 
 	toJSON() {
-		return this.array
+		return this.tuple()
 	}
 
 	toString() {
-		return `(Mat4 ${this.array.map(n => n.toFixed(2)).join(", ")})`
+		return `(Mat4 ${this.tuple().map(n => n.toFixed(2)).join(", ")})`
 	}
 
 	/** mutator */
-	set(array: Mat4Array) {
-		this.array = [...array] as Mat4Array
+	set(mat: Mat4) {
+		this.buffer.set(mat.buffer)
 		return this
 	}
 
 	/** mutator */
-	identity() {
-		return this.set(Mat4.identityArray())
+	from(array: ArrayLike<number>) {
+		this.buffer.set(array)
+		return this
 	}
 
 	/** mutator */
 	mul(other: Mat4) {
-		const a = this.array
-		const b = other.array
-		const r = Array(16).fill(0) as Mat4Array
+		const a = this.buffer
+		const b = other.buffer
+		const r = new Float32Array(16)
 
 		for (let row = 0; row < 4; row++) {
 			for (let col = 0; col < 4; col++) {
@@ -151,20 +136,18 @@ export class Mat4 {
 			}
 		}
 
-		this.array = r
+		this.buffer.set(r)
 		return this
 	}
 
 	/** mutator */
 	invert() {
-		const m = this.array
-
 		const [
 			a00, a01, a02, a03,
 			a10, a11, a12, a13,
 			a20, a21, a22, a23,
 			a30, a31, a32, a33,
-		] = m
+		] = this.buffer
 
 		const b00 = a00 * a11 - a01 * a10
 		const b01 = a00 * a12 - a02 * a10
@@ -184,7 +167,7 @@ export class Mat4 {
 
 		det = 1 / det
 
-		this.array = [
+		this.buffer.set([
 			(a11 * b11 - a12 * b10 + a13 * b09) * det,
 			(a02 * b10 - a01 * b11 - a03 * b09) * det,
 			(a31 * b05 - a32 * b04 + a33 * b03) * det,
@@ -204,13 +187,13 @@ export class Mat4 {
 			(a00 * b09 - a01 * b07 + a02 * b06) * det,
 			(a31 * b01 - a30 * b03 - a32 * b00) * det,
 			(a20 * b03 - a21 * b01 + a22 * b00) * det,
-		]
+		])
 
 		return this
 	}
 
 	transformPoint(point: Xyz) {
-		const m = this.array
+		const m = this.buffer
 		const {x, y, z} = point
 
 		const tx = x * m[0] + y * m[1] + z * m[2] + m[3]
@@ -224,8 +207,7 @@ export class Mat4 {
 	}
 
 	transformVector({x, y, z}: Xyz) {
-		const m = this.array
-
+		const m = this.buffer
 		return new Vec3(
 			x * m[0] + y * m[1] + z * m[2],
 			x * m[4] + y * m[5] + z * m[6],

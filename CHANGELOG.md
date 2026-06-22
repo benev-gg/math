@@ -13,6 +13,16 @@
 ### v0.4.0
 - 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
 - 🟥 rename `Vec2.fromAngle` to `Vec2.rotation`
+- 🟥 renames:
+  - `XyArray` -> `Tuple2`
+  - `XyzArray` -> `Tuple3`
+  - `XyzwArray` -> `Tuple4`
+  - `Mat4Array` -> `Tuple16`
+- 🟥 renames:
+  - `Circle->clone` -> `Circle->dup`
+  - `Rect->clone` -> `Rect->dup`
+  - `Box->clone` -> `Box->dup`
+  - `Segment->clone` -> `Segment->dup`
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
 
 

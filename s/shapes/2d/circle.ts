@@ -1,8 +1,9 @@
 
 import {Rect} from "./rect.js"
-import {Vec2, XyArray, Xy} from "../../core/vec2.js"
+import {Vec2, Xy} from "../../core/vec2.js"
+import {Tuple2} from "../../core/tuples.js"
 
-export type CircleJson = [center: XyArray, radius: number]
+export type CircleJson = [center: Tuple2, radius: number]
 export type CircleLike = {center: Xy, radius: number}
 
 export class Circle {
@@ -21,7 +22,7 @@ export class Circle {
 		return [this.center.dup().toJSON(), this.radius]
 	}
 
-	clone() {
+	dup() {
 		return new Circle(this.center.dup(), this.radius)
 	}
 

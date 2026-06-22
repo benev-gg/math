@@ -1,7 +1,7 @@
 
 import {Scalar} from "./scalar.js"
+import {Tuple3} from "./tuples.js"
 
-export type XyzArray = [x: number, y: number, z: number]
 export type Xyz = {x: number, y: number, z: number}
 
 export class Vec3 {
@@ -23,7 +23,7 @@ export class Vec3 {
 		return new this(value, value, value)
 	}
 
-	static from(v: XyzArray | Xyz) {
+	static from(v: Tuple3 | Xyz) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y, v.z)
@@ -80,12 +80,12 @@ export class Vec3 {
 		yield this.z
 	}
 
-	array(): XyzArray {
+	tuple(): Tuple3 {
 		return [this.x, this.y, this.z]
 	}
 
-	toJSON(): XyzArray {
-		return this.array()
+	toJSON(): Tuple3 {
+		return this.tuple()
 	}
 
 	toString() {
@@ -109,7 +109,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	from(v: Xyz | XyzArray) {
+	from(v: Xyz | Tuple3) {
 		if (Array.isArray(v)) {
 			const [x, y, z] = v
 			this.x = x

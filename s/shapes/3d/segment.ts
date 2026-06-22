@@ -21,7 +21,7 @@ export class Segment {
 			.half()
 	}
 
-	clone() {
+	dup() {
 		return new Segment(
 			this.start.dup(),
 			this.end.dup(),

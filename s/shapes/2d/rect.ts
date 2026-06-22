@@ -1,8 +1,9 @@
 
-import {Vec2, XyArray, Xy} from "../../core/vec2.js"
+import {Vec2, Xy} from "../../core/vec2.js"
+import {Tuple2} from "../../core/tuples.js"
 import {pointVsRect} from "../../physics/2d/collide2d.js"
 
-export type RectJson = [min: XyArray, max: XyArray]
+export type RectJson = [min: Tuple2, max: Tuple2]
 export type RectLike = {min: Xy, max: Xy}
 
 export class Rect {
@@ -31,10 +32,6 @@ export class Rect {
 
 	static point(vec: Xy) {
 		return new this(Vec2.from(vec), Vec2.from(vec))
-	}
-
-	clone() {
-		return new Rect(this.min.dup(), this.max.dup())
 	}
 
 	dup() {

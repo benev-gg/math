@@ -1,7 +1,7 @@
 
 import {Xyz} from "./vec3.js"
+import {Tuple4} from "./tuples.js"
 
-export type XyzwArray = [x: number, y: number, z: number, w: number]
 export type Xyzw = {x: number, y: number, z: number, w: number}
 
 export class Quat {
@@ -9,38 +9,41 @@ export class Quat {
 		public x = 0,
 		public y = 0,
 		public z = 0,
-		public w = 0,
+		public w = 1,
 	) {}
 
-	static new(x = 0, y = 0, z = 0, w = 0) {
+	static new(x = 0, y = 0, z = 0, w = 1) {
 		return new this(x, y, z, w)
 	}
 
-	static identity() {
-		return new this(0, 0, 0, 1)
-	}
-
-	static from(q: XyzwArray | Xyzw) {
+	static from(q: Tuple4 | Xyzw) {
 		return Array.isArray(q)
 			? new this(...q)
 			: new this(q.x, q.y, q.z, q.w)
 	}
 
 	static rotate_(pitch: number, yaw: number, roll: number) {
-		return this.identity().rotate_(pitch, yaw, roll)
+		return this.new().rotate_(pitch, yaw, roll)
 	}
 
 	static rotate(vec: Xyz) {
-		return this.identity().rotate(vec)
+		return this.new().rotate(vec)
 	}
 
-	array(): XyzwArray {
+	tuple(): Tuple4 {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
 
-	toJSON(): XyzwArray {
-		return this.array()
+	toJSON(): Tuple4 {
+		return this.tuple()
+	}
+
+	*[Symbol.iterator]() {
+		yield this.x
+		yield this.y
+		yield this.z
+		yield this.w
 	}
 
 	toString() {

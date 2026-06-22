@@ -1,9 +1,9 @@
 
 import {Scalar} from "../core/scalar.js"
-import {XyArray} from "../core/vec2.js"
+import {Tuple2} from "../core/tuples.js"
 
 /** resolve a number within a linear spline. */
-export function linear(x: number, points: XyArray[]): number {
+export function linear(x: number, points: Tuple2[]): number {
 	if (points.length < 2)
 		throw new Error("need at least two points, come on")
 
@@ -25,7 +25,7 @@ export function linear(x: number, points: XyArray[]): number {
 }
 
 /** resolve a number within a catmull-rom spline, that's all smooth-like. */
-export function catmullRom(x: number, points: XyArray[]) {
+export function catmullRom(x: number, points: Tuple2[]) {
 	if (points.length < 4)
 		throw new Error("need at least four points for this magic")
 
@@ -53,7 +53,7 @@ export function ezLinear(x: number, points: number[]) {
 		throw new Error("need at least two points, come on")
 
 	const points2 = points.map(
-		(p, index): XyArray =>
+		(p, index): Tuple2 =>
 			[Scalar.clamp(index / (points.length - 1)), p]
 	)
 
@@ -63,10 +63,10 @@ export function ezLinear(x: number, points: number[]) {
 /** internal big-brain maths for the catmull-rom implementation */
 function catmullRomMechanics(
 		t: number,
-		[,p0]: XyArray,
-		[,p1]: XyArray,
-		[,p2]: XyArray,
-		[,p3]: XyArray,
+		[,p0]: Tuple2,
+		[,p1]: Tuple2,
+		[,p2]: Tuple2,
+		[,p3]: Tuple2,
 	) {
 
 	const t2 = t * t

@@ -1,7 +1,8 @@
 
-import {Vec3, XyzArray, Xyz} from "../../core/vec3.js"
+import {Tuple3} from "../../core/tuples.js"
+import {Vec3, Xyz} from "../../core/vec3.js"
 
-export type BoxJson = [min: XyzArray, max: XyzArray]
+export type BoxJson = [min: Tuple3, max: Tuple3]
 export type BoxLike = {min: Xyz, max: Xyz}
 
 export class Box {
@@ -31,7 +32,7 @@ export class Box {
 		return [this.min.toJSON(), this.max.toJSON()]
 	}
 
-	clone() {
+	dup() {
 		return new Box(this.min.dup(), this.max.dup())
 	}
 

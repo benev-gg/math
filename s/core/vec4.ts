@@ -1,5 +1,6 @@
 
-import {Xyzw, XyzwArray} from "./quat.js"
+import {Xyzw} from "./quat.js"
+import {Tuple4} from "./tuples.js"
 
 export class Vec4 {
 	constructor(
@@ -17,7 +18,7 @@ export class Vec4 {
 		return new this(0, 0, 0, 0)
 	}
 
-	static from(v: XyzwArray | Xyzw) {
+	static from(v: Tuple4 | Xyzw) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y, v.z, v.w)
@@ -34,13 +35,13 @@ export class Vec4 {
 		yield this.w
 	}
 
-	array(): XyzwArray {
+	tuple(): Tuple4 {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
 
-	toJSON(): XyzwArray {
-		return this.array()
+	toJSON(): Tuple4 {
+		return this.tuple()
 	}
 
 	toString() {
