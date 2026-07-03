@@ -92,6 +92,11 @@ export class Mat4 {
 		return new Mat4(this.buffer.slice())
 	}
 
+	compose(translation: Vec3, rotation: Quat, scale: Vec3) {
+		compose(this.buffer, translation, rotation, scale)
+		return this
+	}
+
 	*[Symbol.iterator]() {
 		yield* this.buffer
 	}
