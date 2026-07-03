@@ -80,7 +80,7 @@ export class Rect {
 	}
 
 	boundingBox() {
-		return this.clone()
+		return this.dup()
 	}
 }
 

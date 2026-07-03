@@ -1,6 +1,6 @@
 
 import {Vec2} from "../../core/vec2.js"
-import {Scalar} from "../../core/scalar.js"
+import {clamp} from "../../core/basics.js"
 import {Rect} from "../../shapes/2d/rect.js"
 import {collide2d} from "./collide2d.barrel.js"
 import {Circle} from "../../shapes/2d/circle.js"
@@ -41,8 +41,8 @@ export function rectVsCircle(rect: Rect, circle: Circle) {
 	if (!collide2d.rectVsCircle(rect, circle)) return null
 
 	const clamped = new Vec2(
-		Scalar.clamp(circle.center.x, rect.min.x, rect.max.x),
-		Scalar.clamp(circle.center.y, rect.min.y, rect.max.y),
+		clamp(circle.center.x, rect.min.x, rect.max.x),
+		clamp(circle.center.y, rect.min.y, rect.max.y),
 	)
 	const difference = circle.center.dup().sub(clamped)
 	const distance = difference.magnitude()

@@ -1,5 +1,5 @@
 
-import {Scalar} from "./scalar.js"
+import {wrap} from "./basics.js"
 
 const circle = 2 * Math.PI
 
@@ -22,7 +22,7 @@ export class Circular {
 	}
 
 	static normalize(x: number) {
-		return Scalar.wrap(x, 0, circle)
+		return wrap(x, 0, circle)
 	} normalize() {
 		this.x = Circular.normalize(this.x)
 		return this
@@ -59,15 +59,6 @@ export class Circular {
 		)
 	} step(y: number | Circular, delta: number) {
 		this.x = Circular.step(this.x, Circular.value(y), delta)
-		return this
-	}
-
-	static approach(x: number, y: number, speed: number, deltaTime: number, speedLimit?: number) {
-		const difference = this.difference(x, y)
-		const change = Scalar.creep(difference, speed, deltaTime, speedLimit)
-		return this.normalize(x + change)
-	} approach(y: number | Circular, speed: number, deltaTime: number, speedLimit?: number) {
-		this.x = Circular.approach(this.x, Circular.value(y), speed, deltaTime, speedLimit)
 		return this
 	}
 }

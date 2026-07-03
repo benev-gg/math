@@ -1,6 +1,6 @@
 
+import {clamp} from "../../core/basics.js"
 import {Vec2, Xy} from "../../core/vec2.js"
-import {Scalar} from "../../core/scalar.js"
 import {RectLike} from "../../shapes/2d/rect.js"
 import {CircleLike} from "../../shapes/2d/circle.js"
 
@@ -32,8 +32,8 @@ export function rectVsRect(a: RectLike, b: RectLike) {
 
 export function rectVsCircle(rect: RectLike, circle: CircleLike) {
 	const clamped = new Vec2(
-		Scalar.clamp(circle.center.x, rect.min.x, rect.max.x),
-		Scalar.clamp(circle.center.y, rect.min.y, rect.max.y),
+		clamp(circle.center.x, rect.min.x, rect.max.x),
+		clamp(circle.center.y, rect.min.y, rect.max.y),
 	)
 	const difference = Vec2.from(circle.center).sub(clamped)
 	const distanceSquared = (difference.x ** 2) + (difference.y ** 2)

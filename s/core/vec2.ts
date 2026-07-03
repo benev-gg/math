@@ -1,5 +1,5 @@
 
-import {Scalar} from "./scalar.js"
+import {clamp} from "./basics.js"
 import {Tuple2} from "./tuples.js"
 
 export type Xy = {x: number, y: number}
@@ -187,7 +187,7 @@ export class Vec2 implements Xy {
 		const dot = this.dot_(x, y)
 		const magnitudes = this.magnitude() * Vec2.magnitude(x, y)
 		if (magnitudes === 0) return 0
-		const ratio = Scalar.clamp(dot / magnitudes, -1, 1)
+		const ratio = clamp(dot / magnitudes, -1, 1)
 		return Math.acos(ratio)
 	}
 
@@ -276,15 +276,15 @@ export class Vec2 implements Xy {
 
 	/** mutator */
 	clamp(min: Xy = {x: 0, y: 0}, max: Xy = {x: 1, y: 1}) {
-		this.x = Scalar.clamp(this.x, min.x, max.x)
-		this.y = Scalar.clamp(this.y, min.y, max.y)
+		this.x = clamp(this.x, min.x, max.x)
+		this.y = clamp(this.y, min.y, max.y)
 		return this
 	}
 
 	/** mutator */
 	clampBy(min = 0, max = 1) {
-		this.x = Scalar.clamp(this.x, min, max)
-		this.y = Scalar.clamp(this.y, min, max)
+		this.x = clamp(this.x, min, max)
+		this.y = clamp(this.y, min, max)
 		return this
 	}
 
@@ -391,18 +391,8 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	lerp({x, y}: Xy, fraction: number) {
-		return this.lerp_(x, y, fraction)
-	}
-
-	approach_(x: number, y: number, speed: number, deltaTime: number, speedLimit?: number) {
-		this.x = Scalar.approach(this.x, x, speed, deltaTime, speedLimit)
-		this.y = Scalar.approach(this.y, y, speed, deltaTime, speedLimit)
-		return this
-	}
-
-	approach({x, y}: Xy, speed: number, deltaTime: number, speedLimit?: number) {
-		return this.approach_(x, y, speed, deltaTime, speedLimit)
+	lerp(fraction: number, {x, y}: Xy) {
+		return this.lerp_(fraction, x, y)
 	}
 
 	/** mutator */
@@ -419,7 +409,7 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	rotateAroundPoint_(x: number, y: number, radians: number) {
+	rotateAroundPoint_(radians: number, x: number, y: number) {
 		const dx = this.x - x
 		const dy = this.y - y
 		const cos = Math.cos(radians)
@@ -430,20 +420,8 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	rotateAroundPoint({x, y}: Xy, radians: number) {
-		return this.rotateAroundPoint_(x, y, radians)
-	}
-
-	/** mutator */
-	smooth_(x: number, y: number, smoothing: number) {
-		this.x = Scalar.smooth(this.x, x, smoothing)
-		this.y = Scalar.smooth(this.y, y, smoothing)
-		return this
-	}
-
-	/** mutator */
-	smooth({x, y}: Xy, smoothing: number) {
-		return this.smooth_(x, y, smoothing)
+	rotateAroundPoint(radians: number, {x, y}: Xy) {
+		return this.rotateAroundPoint_(radians, x, y)
 	}
 }
 

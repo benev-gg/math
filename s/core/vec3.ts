@@ -1,5 +1,5 @@
 
-import {Scalar} from "./scalar.js"
+import {clamp, lerp} from "./basics.js"
 import {Tuple3} from "./tuples.js"
 
 export type Xyz = {x: number, y: number, z: number}
@@ -136,7 +136,7 @@ export class Vec3 {
 
 	/** rgb values from 0-1 */
 	toHex() {
-		const to255 = (val: number) => Math.round(Scalar.clamp(val * 255, 0, 255))
+		const to255 = (val: number) => Math.round(clamp(val * 255, 0, 255))
 		const toHex = (val: number) => to255(val).toString(16).padStart(2, '0')
 		return `#${toHex(this.x)}${toHex(this.y)}${toHex(this.z)}`
 	}
@@ -205,7 +205,7 @@ export class Vec3 {
 		const dotProduct = this.dot_(x, y, z)
 		const magnitudes = this.magnitude() * Vec3.magnitude(x, y, z)
 		if (magnitudes === 0) return 0
-		const ratio = Scalar.clamp(dotProduct / magnitudes, -1, 1)
+		const ratio = clamp(dotProduct / magnitudes, -1, 1)
 		return Math.acos(ratio)
 	}
 
@@ -311,17 +311,17 @@ export class Vec3 {
 
 	/** mutator */
 	clamp(min: Xyz = {x: 0, y: 0, z: 0}, max: Xyz = {x: 1, y: 1, z: 1}) {
-		this.x = Scalar.clamp(this.x, min.x, max.x)
-		this.y = Scalar.clamp(this.y, min.y, max.y)
-		this.z = Scalar.clamp(this.z, min.z, max.z)
+		this.x = clamp(this.x, min.x, max.x)
+		this.y = clamp(this.y, min.y, max.y)
+		this.z = clamp(this.z, min.z, max.z)
 		return this
 	}
 
 	/** mutator */
 	clampBy(min = 0, max = 1) {
-		this.x = Scalar.clamp(this.x, min, max)
-		this.y = Scalar.clamp(this.y, min, max)
-		this.z = Scalar.clamp(this.z, min, max)
+		this.x = clamp(this.x, min, max)
+		this.y = clamp(this.y, min, max)
+		this.z = clamp(this.z, min, max)
 		return this
 	}
 
@@ -379,7 +379,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	floor(): this {
+	floor() {
 		this.x = Math.floor(this.x)
 		this.y = Math.floor(this.y)
 		this.z = Math.floor(this.z)
@@ -387,7 +387,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	ceil(): this {
+	ceil() {
 		this.x = Math.ceil(this.x)
 		this.y = Math.ceil(this.y)
 		this.z = Math.ceil(this.z)
@@ -395,7 +395,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	round(): this {
+	round() {
 		this.x = Math.round(this.x)
 		this.y = Math.round(this.y)
 		this.z = Math.round(this.z)
@@ -419,27 +419,16 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	lerp_(x: number, y: number, z: number, fraction: number): this {
-		this.x += (x - this.x) * fraction
-		this.y += (y - this.y) * fraction
-		this.z += (z - this.z) * fraction
+	lerp_(fraction: number, x: number, y: number, z: number, maxDelta?: number): this {
+		this.x = lerp(fraction, this.x, x, maxDelta)
+		this.y = lerp(fraction, this.y, y, maxDelta)
+		this.z = lerp(fraction, this.z, z, maxDelta)
 		return this
 	}
 
 	/** mutator */
-	lerp({x, y, z}: Xyz, fraction: number) {
-		return this.lerp_(x, y, z, fraction)
-	}
-
-	approach_(x: number, y: number, z: number, speed: number, deltaTime: number, speedLimit?: number) {
-		this.x = Scalar.approach(this.x, x, speed, deltaTime, speedLimit)
-		this.y = Scalar.approach(this.y, y, speed, deltaTime, speedLimit)
-		this.z = Scalar.approach(this.z, z, speed, deltaTime, speedLimit)
-		return this
-	}
-
-	approach({x, y, z}: Xyz, speed: number, deltaTime: number, speedLimit?: number) {
-		return this.approach_(x, y, z, speed, deltaTime, speedLimit)
+	lerp({x, y, z}: Xyz, fraction: number, maxDelta?: number) {
+		return this.lerp_(fraction, x, y, z, maxDelta)
 	}
 
 	/** mutator */
@@ -473,7 +462,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	rotateAroundAxis_(ux: number, uy: number, uz: number, angle: number): this {
+	rotateAroundAxis_(angle: number, ux: number, uy: number, uz: number): this {
 		const cos = Math.cos(angle)
 		const sin = Math.sin(angle)
 		const {x, y, z} = this
@@ -484,21 +473,8 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	rotateAroundAxis({x, y, z}: Xyz, angle: number) {
+	rotateAroundAxis(angle: number, {x, y, z}: Xyz) {
 		return this.rotateAroundAxis_(x, y, z, angle)
-	}
-
-	/** mutator */
-	smooth_(x: number, y: number, z: number, smoothing: number) {
-		this.x = Scalar.smooth(this.x, x, smoothing)
-		this.y = Scalar.smooth(this.y, y, smoothing)
-		this.z = Scalar.smooth(this.z, z, smoothing)
-		return this
-	}
-
-	/** mutator */
-	smooth({x, y, z}: Xyz, smoothing: number) {
-		return this.smooth_(x, y, z, smoothing)
 	}
 }
 

@@ -1,5 +1,5 @@
 
-import {Scalar} from "../core/scalar.js"
+import {wrap} from "../core/basics.js"
 
 export const pi = Math.PI
 
@@ -21,7 +21,7 @@ export const radians = {
 	},
 
 	circleDistance(radiansA: number, radiansB: number): number {
-		const diff = Math.abs(Scalar.wrap(radiansA - radiansB, 0, radians.circle))
+		const diff = Math.abs(wrap(radiansA - radiansB, 0, radians.circle))
 		return Math.min(diff, radians.circle - diff)
 	},
 }

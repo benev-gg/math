@@ -1,5 +1,5 @@
 
-import {Scalar} from "../core/scalar.js"
+import {clamp} from "../core/basics.js"
 import {Tuple2} from "../core/tuples.js"
 
 /** resolve a number within a linear spline. */
@@ -9,7 +9,7 @@ export function linear(x: number, points: Tuple2[]): number {
 
 	const [first] = points.at(0)!
 	const [last] = points.at(-1)!
-	x = Scalar.clamp(x, first, last)
+	x = clamp(x, first, last)
 
 	for (let i = 0; i < points.length - 1; i++) {
 		const [x0, y0] = points[i]
@@ -31,7 +31,7 @@ export function catmullRom(x: number, points: Tuple2[]) {
 
 	const [first] = points.at(0)!
 	const [last] = points.at(-1)!
-	x = Scalar.clamp(x, first, last)
+	x = clamp(x, first, last)
 
 	// find the segment where 'x' fits
 	for (let i = 1; i < points.length - 2; i++) {
@@ -54,10 +54,10 @@ export function ezLinear(x: number, points: number[]) {
 
 	const points2 = points.map(
 		(p, index): Tuple2 =>
-			[Scalar.clamp(index / (points.length - 1)), p]
+			[clamp(index / (points.length - 1)), p]
 	)
 
-	return linear(Scalar.clamp(x), points2)
+	return linear(clamp(x), points2)
 }
 
 /** internal big-brain maths for the catmull-rom implementation */
