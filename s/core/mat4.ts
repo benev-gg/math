@@ -102,7 +102,7 @@ export class Mat4 {
 	}
 
 	tuple() {
-		return [...this.buffer]
+		return [...this.buffer] as Tuple16
 	}
 
 	toJSON() {
