@@ -1,10 +1,10 @@
 
-import {Tuple16} from "./tuples.js"
+import {Mat4Array} from "./tuples.js"
 import {Quat, Xyzw} from "./quat.js"
 import {Vec3, type Xyz} from "./vec3.js"
 
 export function compose(
-		buffer: Float32Array | Tuple16,
+		buffer: Float32Array | Mat4Array,
 		translation: Xyz,
 		rotation: Xyzw,
 		scale: Xyz,
@@ -102,7 +102,7 @@ export class Mat4 {
 	}
 
 	tuple() {
-		return [...this.buffer] as Tuple16
+		return [...this.buffer] as Mat4Array
 	}
 
 	toJSON() {

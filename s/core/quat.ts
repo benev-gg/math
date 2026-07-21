@@ -1,6 +1,6 @@
 
 import {Xyz} from "./vec3.js"
-import {Tuple4} from "./tuples.js"
+import {XyzwArray} from "./tuples.js"
 
 export type Xyzw = {x: number, y: number, z: number, w: number}
 
@@ -16,7 +16,7 @@ export class Quat {
 		return new this(x, y, z, w)
 	}
 
-	static from(q: Tuple4 | Xyzw) {
+	static from(q: XyzwArray | Xyzw) {
 		return Array.isArray(q)
 			? new this(...q)
 			: new this(q.x, q.y, q.z, q.w)
@@ -30,12 +30,12 @@ export class Quat {
 		return this.new().rotate(vec)
 	}
 
-	tuple(): Tuple4 {
+	tuple(): XyzwArray {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
 
-	toJSON(): Tuple4 {
+	toJSON(): XyzwArray {
 		return this.tuple()
 	}
 

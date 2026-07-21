@@ -1,8 +1,8 @@
 
-import {Tuple3} from "../../core/tuples.js"
+import {XyzArray} from "../../core/tuples.js"
 import {Vec3, Xyz} from "../../core/vec3.js"
 
-export type BoxJson = [min: Tuple3, max: Tuple3]
+export type BoxJson = [min: XyzArray, max: XyzArray]
 export type BoxLike = {min: Xyz, max: Xyz}
 
 export class Box {

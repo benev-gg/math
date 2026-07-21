@@ -1,6 +1,6 @@
 
 import {clamp, lerp} from "./basics.js"
-import {Tuple3} from "./tuples.js"
+import {XyzArray} from "./tuples.js"
 
 export type Xyz = {x: number, y: number, z: number}
 
@@ -23,7 +23,7 @@ export class Vec3 {
 		return new this(value, value, value)
 	}
 
-	static from(v: Tuple3 | Xyz) {
+	static from(v: XyzArray | Xyz) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y, v.z)
@@ -80,11 +80,11 @@ export class Vec3 {
 		yield this.z
 	}
 
-	tuple(): Tuple3 {
+	tuple(): XyzArray {
 		return [this.x, this.y, this.z]
 	}
 
-	toJSON(): Tuple3 {
+	toJSON(): XyzArray {
 		return this.tuple()
 	}
 
@@ -109,7 +109,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	from(v: Xyz | Tuple3) {
+	from(v: Xyz | XyzArray) {
 		if (Array.isArray(v)) {
 			const [x, y, z] = v
 			this.x = x

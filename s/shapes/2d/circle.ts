@@ -1,9 +1,9 @@
 
 import {Rect} from "./rect.js"
 import {Vec2, Xy} from "../../core/vec2.js"
-import {Tuple2} from "../../core/tuples.js"
+import {XyArray} from "../../core/tuples.js"
 
-export type CircleJson = [center: Tuple2, radius: number]
+export type CircleJson = [center: XyArray, radius: number]
 export type CircleLike = {center: Xy, radius: number}
 
 export class Circle {
