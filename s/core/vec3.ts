@@ -80,12 +80,15 @@ export class Vec3 {
 		yield this.z
 	}
 
-	tuple(): XyzArray {
+	array(): XyzArray {
 		return [this.x, this.y, this.z]
 	}
 
+	/** @deprecated renamed to `array` */
+	tuple() { return this.array() }
+
 	toJSON(): XyzArray {
-		return this.tuple()
+		return this.array()
 	}
 
 	toString() {

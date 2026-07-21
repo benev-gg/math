@@ -30,13 +30,16 @@ export class Quat {
 		return this.new().rotate(vec)
 	}
 
-	tuple(): XyzwArray {
+	array(): XyzwArray {
 		const {x, y, z, w} = this
 		return [x, y, z, w]
 	}
 
+	/** @deprecated renamed to `array` */
+	tuple() { return this.array() }
+
 	toJSON(): XyzwArray {
-		return this.tuple()
+		return this.array()
 	}
 
 	*[Symbol.iterator]() {

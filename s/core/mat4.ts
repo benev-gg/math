@@ -101,16 +101,19 @@ export class Mat4 {
 		yield* this.buffer
 	}
 
-	tuple() {
+	array() {
 		return [...this.buffer] as Mat4Array
 	}
 
+	/** @deprecated renamed to `array` */
+	tuple() { return this.array() }
+
 	toJSON() {
-		return this.tuple()
+		return this.array()
 	}
 
 	toString() {
-		return `(Mat4 ${this.tuple().map(n => n.toFixed(2)).join(", ")})`
+		return `(Mat4 ${this.array().map(n => n.toFixed(2)).join(", ")})`
 	}
 
 	/** mutator */

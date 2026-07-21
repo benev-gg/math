@@ -82,12 +82,15 @@ export class Vec2 implements Xy {
 		yield this.y
 	}
 
-	tuple(): XyArray {
+	array(): XyArray {
 		return [this.x, this.y]
 	}
 
+	/** @deprecated renamed to `array` */
+	tuple() { return this.array() }
+
 	toJSON(): XyArray {
-		return this.tuple()
+		return this.array()
 	}
 
 	toString() {
