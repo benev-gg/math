@@ -1,7 +1,7 @@
 {
 	"name": "@benev/math",
 	"version": "0.3.4",
-	"description": "game math toolkit",
+	"description": "📐 game math typescript library",
 	"license": "MIT",
 	"author": "Chase Moskal <chasemoskal@gmail.com>",
 	"type": "module",
@@ -31,12 +31,12 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/benevolent-games/math.git"
+		"url": "git+https://github.com/benev-gg/math.git"
 	},
 	"bugs": {
-		"url": "https://github.com/benevolent-games/math/issues"
+		"url": "https://github.com/benev-gg/math/issues"
 	},
-	"homepage": "https://github.com/benevolent-games/math#readme",
+	"homepage": "https://github.com/benev-gg/math#readme",
 	"keywords": [
 		"game",
 		"math",
