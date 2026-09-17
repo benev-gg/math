@@ -54,7 +54,7 @@ export class Quat {
 	}
 
 	dup() {
-		return new Quat(...this.toJSON())
+		return new (this.constructor as any)(...this.toJSON()) as typeof this
 	}
 
 	lengthSquared() {

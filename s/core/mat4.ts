@@ -89,7 +89,7 @@ export class Mat4 {
 	}
 
 	dup() {
-		return new Mat4(this.buffer.slice())
+		return new (this.constructor as any)(this.buffer.slice()) as typeof this
 	}
 
 	compose(translation: Vec3, rotation: Quat, scale: Vec3) {

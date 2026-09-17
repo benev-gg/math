@@ -74,7 +74,7 @@ export class Vec2 implements Xy {
 	}
 
 	dup() {
-		return new Vec2(this.x, this.y)
+		return new (this.constructor as any)(this.x, this.y) as typeof this
 	}
 
 	*[Symbol.iterator]() {
@@ -94,7 +94,7 @@ export class Vec2 implements Xy {
 	}
 
 	toString() {
-		return `(Vec2 x${this.x.toFixed(2)}, y${this.y.toFixed(2)})`
+		return `(${this.constructor.name} x${this.x.toFixed(2)}, y${this.y.toFixed(2)})`
 	}
 
 	/** mutator */

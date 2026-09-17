@@ -7,7 +7,7 @@ export class Circular {
 	constructor(public x = 0) {}
 
 	dup() {
-		return new Circular(this.x)
+		return new (this.constructor as any)(this.x) as typeof this
 	}
 
 	set(x: number) {

@@ -59,7 +59,7 @@ export class Vec3 {
 		)
 	}
 
-	static fromHex(hex: string): Vec3 {
+	static fromHex(hex: string) {
 		if (hex.startsWith("#") && hex.length === 7) {
 			const r = parseInt(hex.slice(1, 3), 16) / 255
 			const g = parseInt(hex.slice(3, 5), 16) / 255
@@ -71,7 +71,7 @@ export class Vec3 {
 	}
 
 	dup() {
-		return new Vec3(this.x, this.y, this.z)
+		return new (this.constructor as any)(this.x, this.y, this.z) as typeof this
 	}
 
 	*[Symbol.iterator]() {
@@ -92,7 +92,7 @@ export class Vec3 {
 	}
 
 	toString() {
-		return `(Vec3 x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)})`
+		return `(${this.constructor.name} x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)})`
 	}
 
 	/** mutator */

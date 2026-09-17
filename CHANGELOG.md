@@ -20,6 +20,7 @@
   - `Box->clone` -> `Box->dup`
   - `Segment->clone` -> `Segment->dup`
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
+- 🍏 improve polymorphic types for `dup()` on Vec2, Vec3, Vec4, Circular, Quat, Mat4
 
 
 

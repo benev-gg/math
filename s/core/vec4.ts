@@ -25,7 +25,7 @@ export class Vec4 {
 	}
 
 	dup() {
-		return new Vec4(this.x, this.y, this.z, this.w)
+		return new (this.constructor as any)(this.x, this.y, this.z, this.w) as typeof this
 	}
 
 	*[Symbol.iterator]() {
