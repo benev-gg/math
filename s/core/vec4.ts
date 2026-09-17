@@ -2,6 +2,8 @@
 import {Xyzw} from "./quat.js"
 import {XyzwArray} from "./tuples.js"
 
+type Vec4ish<T extends Vec4> = new(x?: number, y?: number, z?: number, w?: number) => T
+
 export class Vec4 {
 	constructor(
 		public x = 0,
@@ -10,15 +12,15 @@ export class Vec4 {
 		public w = 0,
 	) {}
 
-	static new(x = 0, y = 0, z = 0, w = 0) {
+	static new<T extends Vec4>(this: Vec4ish<T>, x = 0, y = 0, z = 0, w = 0) {
 		return new this(x, y, z, w)
 	}
 
-	static zero() {
-		return new this(0, 0, 0, 0)
+	static zero<T extends Vec4>(this: Vec4ish<T>, ) {
+		return new this()
 	}
 
-	static from(v: XyzwArray | Xyzw) {
+	static from<T extends Vec4>(this: Vec4ish<T>, v: XyzwArray | Xyzw) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y, v.z, v.w)

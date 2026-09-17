@@ -4,6 +4,8 @@ import {XyzwArray} from "./tuples.js"
 
 export type Xyzw = {x: number, y: number, z: number, w: number}
 
+type Quatish<T extends Quat> = new(x?: number, y?: number, z?: number, w?: number) => T
+
 export class Quat {
 	constructor(
 		public x = 0,
@@ -12,22 +14,22 @@ export class Quat {
 		public w = 1,
 	) {}
 
-	static new(x = 0, y = 0, z = 0, w = 1) {
+	static new<T extends Quat>(this: Quatish<T>, x = 0, y = 0, z = 0, w = 1) {
 		return new this(x, y, z, w)
 	}
 
-	static from(q: XyzwArray | Xyzw) {
+	static from<T extends Quat>(this: Quatish<T>, q: XyzwArray | Xyzw) {
 		return Array.isArray(q)
 			? new this(...q)
 			: new this(q.x, q.y, q.z, q.w)
 	}
 
-	static rotate_(pitch: number, yaw: number, roll: number) {
-		return this.new().rotate_(pitch, yaw, roll)
+	static rotate_<T extends Quat>(this: Quatish<T>, pitch: number, yaw: number, roll: number) {
+		return new this().rotate_(pitch, yaw, roll)
 	}
 
-	static rotate(vec: Xyz) {
-		return this.new().rotate(vec)
+	static rotate<T extends Quat>(this: Quatish<T>, vec: Xyz) {
+		return new this().rotate(vec)
 	}
 
 	array(): XyzwArray {

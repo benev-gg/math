@@ -48,24 +48,26 @@ export function mat4Buffer() {
 	])
 }
 
+type Mat4ish<T extends Mat4> = new(buffer?: Float32Array) => T
+
 export class Mat4 {
 	constructor(public buffer = mat4Buffer()) {}
 
-	static new(buffer = mat4Buffer()) {
+	static new<T extends Mat4>(this: Mat4ish<T>, buffer = mat4Buffer()) {
 		return new this(buffer)
 	}
 
-	static from(tuple: ArrayLike<number>) {
+	static from<T extends Mat4>(this: Mat4ish<T>, tuple: ArrayLike<number>) {
 		return new this(new Float32Array(tuple))
 	}
 
-	static compose(translation: Vec3, rotation: Quat, scale: Vec3) {
+	static compose<T extends Mat4>(this: Mat4ish<T>, translation: Vec3, rotation: Quat, scale: Vec3) {
 		const mat = new this()
 		compose(mat.buffer, translation, rotation, scale)
 		return mat
 	}
 
-	static fromQuat({x, y, z, w}: Xyzw) {
+	static fromQuat<T extends Mat4>(this: Mat4ish<T>, {x, y, z, w}: Xyzw) {
 		const x2 = x + x
 		const y2 = y + y
 		const z2 = z + z
@@ -80,12 +82,12 @@ export class Mat4 {
 		const wy = w * y2
 		const wz = w * z2
 
-		return this.from([
+		return new this(new Float32Array([
 			1 - yy - zz, xy - wz,     xz + wy,     0,
 			xy + wz,     1 - xx - zz, yz - wx,     0,
 			xz - wy,     yz + wx,     1 - xx - yy, 0,
 			0,           0,           0,           1,
-		])
+		]))
 	}
 
 	dup() {

@@ -1,8 +1,10 @@
 
-import {clamp, lerp} from "./basics.js"
 import {XyzArray} from "./tuples.js"
+import {clamp, lerp} from "./basics.js"
 
 export type Xyz = {x: number, y: number, z: number}
+
+type Vec3ish<T extends Vec3> = new(x?: number, y?: number, z?: number) => T
 
 export class Vec3 {
 	constructor(
@@ -11,19 +13,19 @@ export class Vec3 {
 		public z = 0,
 	) {}
 
-	static new(x = 0, y = 0, z = 0) {
+	static new<T extends Vec3>(this: Vec3ish<T>, x = 0, y = 0, z = 0) {
 		return new this(x, y, z)
 	}
 
-	static zero() {
-		return new this(0, 0, 0)
+	static zero<T extends Vec3>(this: Vec3ish<T>) {
+		return new this()
 	}
 
-	static all(value: number) {
+	static all<T extends Vec3>(this: Vec3ish<T>, value: number) {
 		return new this(value, value, value)
 	}
 
-	static from(v: XyzArray | Xyz) {
+	static from<T extends Vec3>(this: Vec3ish<T>, v: XyzArray | Xyz) {
 		return Array.isArray(v)
 			? new this(...v)
 			: new this(v.x, v.y, v.z)
@@ -37,13 +39,13 @@ export class Vec3 {
 		return Math.sqrt(this.magnitudeSquared(x, y, z))
 	}
 
-	static average(...vecs: Xyz[]) {
-		return this.zero()
+	static average<T extends Vec3>(this: Vec3ish<T>, ...vecs: Xyz[]) {
+		return new this()
 			.add(...vecs)
 			.divBy(vecs.length)
 	}
 
-	static min(...vecs: Xyz[]) {
+	static min<T extends Vec3>(this: Vec3ish<T>, ...vecs: Xyz[]) {
 		return new this(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
@@ -51,7 +53,7 @@ export class Vec3 {
 		)
 	}
 
-	static max(...vecs: Xyz[]) {
+	static max<T extends Vec3>(this: Vec3ish<T>, ...vecs: Xyz[]) {
 		return new this(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
@@ -59,7 +61,7 @@ export class Vec3 {
 		)
 	}
 
-	static fromHex(hex: string) {
+	static fromHex<T extends Vec3>(this: Vec3ish<T>, hex: string) {
 		if (hex.startsWith("#") && hex.length === 7) {
 			const r = parseInt(hex.slice(1, 3), 16) / 255
 			const g = parseInt(hex.slice(3, 5), 16) / 255

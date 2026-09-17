@@ -14,28 +14,32 @@ export const unindex2d = (extent: Xy, index: number) => {
 	return new Vec2(x, y)
 }
 
+type Vec2ish<T extends Vec2> = new(x?: number, y?: number) => T
+
 export class Vec2 implements Xy {
 	constructor(
 		public x = 0,
 		public y = 0,
 	) {}
 
-	static new(x = 0, y = 0) {
+	static new<T extends Vec2>(this: Vec2ish<T>, x = 0, y = 0) {
 		return new this(x, y)
 	}
 
-	static zero() {
-		return new this(0, 0)
+	static zero<T extends Vec2>(this: Vec2ish<T>) {
+		return new this()
 	}
 
-	static all(value: number) {
+	static all<T extends Vec2>(this: Vec2ish<T>, value: number) {
 		return new this(value, value)
 	}
 
-	static from(v: XyArray | Xy) {
-		return Array.isArray(v)
-			? new this(...v)
-			: new this(v.x, v.y)
+	static from<T extends Vec2>(this: Vec2ish<T>, v: XyArray | Xy): T {
+		return (
+			Array.isArray(v)
+				? new this(...v)
+				: new this(v.x, v.y)
+		)
 	}
 
 	static magnitudeSquared(x: number, y: number) {
@@ -46,27 +50,27 @@ export class Vec2 implements Xy {
 		return Math.sqrt(this.magnitudeSquared(x, y))
 	}
 
-	static average(...vectors: Xy[]) {
-		return this.zero()
+	static average<T extends Vec2>(this: Vec2ish<T>, ...vectors: Xy[]): T {
+		return new this()
 			.add(...vectors)
 			.divBy(vectors.length)
 	}
 
-	static min(...vecs: Xy[]) {
+	static min<T extends Vec2>(this: Vec2ish<T>, ...vecs: Xy[]) {
 		return new this(
 			Math.min(...vecs.map(v => v.x)),
 			Math.min(...vecs.map(v => v.y)),
 		)
 	}
 
-	static max(...vecs: Xy[]) {
+	static max<T extends Vec2>(this: Vec2ish<T>, ...vecs: Xy[]) {
 		return new this(
 			Math.max(...vecs.map(v => v.x)),
 			Math.max(...vecs.map(v => v.y)),
 		)
 	}
 
-	static rotation(radians: number) {
+	static rotation<T extends Vec2>(this: Vec2ish<T>, radians: number) {
 		return new this(
 			Math.cos(radians),
 			Math.sin(radians),
