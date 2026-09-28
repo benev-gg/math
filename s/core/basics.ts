@@ -20,6 +20,10 @@ export function clamp(x: number, a: number = 0, b: number = 1) {
 	return x
 }
 
+export function invert(x: number) {
+	return 1 - x
+}
+
 export function atLeast(x: number, least = 0) {
 	return Math.max(x, least)
 }
