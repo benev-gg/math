@@ -75,6 +75,14 @@ export function approach(maxDelta: number, from: number, to: number) {
 	return from + delta
 }
 
+export function smoothstep(x: number) {
+	return x * x * (3 - (2 * x))
+}
+
+export function smootherstep(x: number) {
+	return x * x * x * (x * (x * 6 - 15) + 10)
+}
+
 export function circularNormalize(x: number) {
 	return wrap(x, 0, Math.PI * 2)
 }
