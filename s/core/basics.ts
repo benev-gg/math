@@ -8,6 +8,12 @@ export function sum(...numbers: number[]) {
 	return x
 }
 
+export function average(...numbers: number[]) {
+	if (numbers.length === 0) throw new Error("no numbers for average fn")
+	return sum(...numbers) / numbers.length
+}
+
+/** inclusive */
 export function between(x: number, a = 0, b = 1) {
 	const small = Math.min(a, b)
 	const big = Math.max(a, b)
