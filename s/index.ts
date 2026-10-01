@@ -11,7 +11,7 @@ export * from "./core/vec4.js"
 export * from "./tools/angles.js"
 export * from "./tools/crypto-random.js"
 export * from "./tools/noise.js"
-export * as spline from "./tools/spline.js"
+export * from "./tools/spline.js"
 
 export * from "./optimizers/hash-map.js"
 export * from "./optimizers/hash-set.js"
