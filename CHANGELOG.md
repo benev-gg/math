@@ -12,12 +12,12 @@
 
 ### v0.4.0
 - 🟥 rework splines.
-  - rename `spline.linear` to `splineLinear`
-  - rename `spline.catmull` to `splineCatmull`
-  - rename `spline.ezLinear` to `linear`
-  - add fn `catmull`
-  - add fn `linear2d` and `linear3d`
-  - add fn `catmull2d` and `catmull3d`
+  - 🟥rename `spline.linear` to `splineLinear`
+  - 🟥rename `spline.catmull` to `splineCatmull`
+  - 🟥 rename `spline.ezLinear` to `linear`
+  - 🍏 add fn `catmull`
+  - 🍏 add fn `linear2d` and `linear3d`
+  - 🍏 add fn `catmull2d` and `catmull3d`
 - 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
 - 🟥 delete `Scalar` class in favor of a bunch of basic standalone fns
 - 🟥 rename `Vec2.fromAngle` to `Vec2.rotation`
@@ -27,6 +27,7 @@
   - `Box->clone` -> `Box->dup`
   - `Segment->clone` -> `Segment->dup`
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
+- 🍏 add fns `average`, `smoothstep`, `smootherstep`
 - 🍏 improve polymorphic typings on Vec2, Vec3, Vec4, Circular, Quat, Mat4
 
 
