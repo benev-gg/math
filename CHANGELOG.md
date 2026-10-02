@@ -30,6 +30,7 @@
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
 - 🍏 add fns `average`, `smoothstep`, `smootherstep`
 - 🍏 improve polymorphic typings on Vec2, Vec3, Vec4, Circular, Quat, Mat4
+- 🍏 add fns `stronger` and `weaker`
 
 
 

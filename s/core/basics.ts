@@ -81,6 +81,16 @@ export function approach(maxDelta: number, from: number, to: number) {
 	return from + delta
 }
 
+export function stronger(noul: number, power = 2) {
+	noul = invert(noul)
+	noul = noul ** power
+	return invert(noul)
+}
+
+export function weaker(noul: number, power = 2) {
+	return noul ** power
+}
+
 export function smoothstep(x: number) {
 	return x * x * (3 - (2 * x))
 }
