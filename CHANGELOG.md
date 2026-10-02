@@ -15,6 +15,7 @@
   - 🟥rename `spline.linear` to `splineLinear`
   - 🟥rename `spline.catmull` to `splineCatmull`
   - 🟥 rename `spline.ezLinear` to `linear`
+  - 🍏 add fn `smoothly` and `splineSmoothly`
   - 🍏 add fn `catmull`
   - 🍏 add fn `linear2d` and `linear3d`
   - 🍏 add fn `catmull2d` and `catmull3d`

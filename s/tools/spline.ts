@@ -91,7 +91,7 @@ export function catmull3d(noul: number, points: readonly Xyz[]) {
 }
 
 /** uniform scalar spline using smoothstep per segment; holds endpoint values outside 0–1. */
-export function smooth(noul: number, points: readonly number[]) {
+export function smoothly(noul: number, points: readonly number[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	return lerp(ease(fraction), points[segment], points[segment + 1])
@@ -107,7 +107,7 @@ export function splineLinear(x: number, points: Knots) {
 }
 
 /** smoothstep spline through input/value pairs; holds endpoint values outside the input range. */
-export function splineSmooth(x: number, points: Knots) {
+export function splineSmoothly(x: number, points: Knots) {
 	const segment = findSegment(x, points)
 	const [x0, y0] = points[segment]
 	const [x1, y1] = points[segment + 1]
