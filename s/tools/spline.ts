@@ -12,14 +12,14 @@ type Knots = readonly Readonly<XyArray>[]
 // vector functions return a fresh vector and preserve the supplied points.
 
 /** linear spline with uniformly spaced values over 0–1; extrapolates outside. */
-export function linear(noul: number, points: readonly number[]) {
+export function linearly(noul: number, points: readonly number[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	return lerp(fraction, points[segment], points[segment + 1])
 }
 
 /** piecewise-linear 2d path with uniformly spaced control points over 0–1; extrapolates outside. */
-export function linear2d(noul: number, points: readonly Xy[]) {
+export function linearly2d(noul: number, points: readonly Xy[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	const start = points[segment]
@@ -32,7 +32,7 @@ export function linear2d(noul: number, points: readonly Xy[]) {
 }
 
 /** piecewise-linear 3d path with uniformly spaced control points over 0–1; extrapolates outside. */
-export function linear3d(noul: number, points: readonly Xyz[]) {
+export function linearly3d(noul: number, points: readonly Xyz[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	const start = points[segment]
@@ -46,7 +46,7 @@ export function linear3d(noul: number, points: readonly Xyz[]) {
 }
 
 /** uniform scalar catmull-rom spline over 0–1; extrapolates along endpoint tangents. may overshoot. */
-export function catmull(noul: number, points: readonly number[]) {
+export function catmully(noul: number, points: readonly number[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 
@@ -60,7 +60,7 @@ export function catmull(noul: number, points: readonly number[]) {
 }
 
 /** uniform 2d catmull-rom path over 0–1; extrapolates along endpoint tangents. may overshoot. */
-export function catmull2d(noul: number, points: readonly Xy[]) {
+export function catmully2d(noul: number, points: readonly Xy[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	const start = points[segment]
@@ -75,7 +75,7 @@ export function catmull2d(noul: number, points: readonly Xy[]) {
 }
 
 /** uniform 3d catmull-rom path over 0–1; extrapolates along endpoint tangents. may overshoot. */
-export function catmull3d(noul: number, points: readonly Xyz[]) {
+export function catmully3d(noul: number, points: readonly Xyz[]) {
 	const segment = uniformSegment(noul, points.length)
 	const fraction = noul * (points.length - 1) - segment
 	const start = points[segment]
@@ -107,7 +107,7 @@ export function splineLinear(x: number, points: Knots) {
 }
 
 /** smoothstep spline through input/value pairs; holds endpoint values outside the input range. */
-export function splineSmoothly(x: number, points: Knots) {
+export function splineSmooth(x: number, points: Knots) {
 	const segment = findSegment(x, points)
 	const [x0, y0] = points[segment]
 	const [x1, y1] = points[segment + 1]

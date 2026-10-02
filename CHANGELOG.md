@@ -14,11 +14,11 @@
 - 🟥 rework splines.
   - 🟥rename `spline.linear` to `splineLinear`
   - 🟥rename `spline.catmull` to `splineCatmull`
-  - 🟥 rename `spline.ezLinear` to `linear`
-  - 🍏 add fn `smoothly` and `splineSmoothly`
-  - 🍏 add fn `catmull`
-  - 🍏 add fn `linear2d` and `linear3d`
-  - 🍏 add fn `catmull2d` and `catmull3d`
+  - 🟥 rename `spline.ezLinear` to `linearly`
+  - 🍏 add fn `smoothly` and `splineSmooth`
+  - 🍏 add fn `catmully`
+  - 🍏 add fn `linearly2d` and `linearly3d`
+  - 🍏 add fn `catmully2d` and `catmully3d`
 - 🟥 delete `Randy` class in favor of `Rand` that now lives in `@e280/stz` library
 - 🟥 delete `Scalar` class in favor of a bunch of basic standalone fns
 - 🟥 rename `Vec2.fromAngle` to `Vec2.rotation`
