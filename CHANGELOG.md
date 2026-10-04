@@ -11,10 +11,14 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 rework all `circular` fns and `angles`
+  - 🟥 `circularNormalize` replaced by `angleNormalize` (etc)
+  - 🟥 `circularDifference` replaced by `angleDelta` (etc)
+  - 🟥 `radians.toDegrees` replaced by `toDegrees` (etc)
 - 🟥 rename `Vec.all` to `Vec.fill` for Vec2, Vec3, Vec4
 - 🟥 rework splines.
-  - 🟥rename `spline.linear` to `splineLinear`
-  - 🟥rename `spline.catmull` to `splineCatmull`
+  - 🟥 rename `spline.linear` to `splineLinear`
+  - 🟥 rename `spline.catmull` to `splineCatmull`
   - 🟥 rename `spline.ezLinear` to `linearly`
   - 🍏 add fn `smoothly` and `splineSmooth`
   - 🍏 add fn `catmully`
