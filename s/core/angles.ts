@@ -51,9 +51,11 @@ export function angleDistance(a: number, b: number) {
 
 export function angleApproach(step: number, from: number, to: number) {
 	const delta = angleDelta(from, to)
-	return (Math.abs(delta) <= step)
-		? to
-		: angleNormalize(from + Math.sign(delta) * step)
+	return angleNormalize(
+		(Math.abs(delta) <= step)
+			? to
+			: from + Math.sign(delta) * step
+	)
 }
 
 export function angleLerp(fraction: number, x: number, y: number, max?: number) {
