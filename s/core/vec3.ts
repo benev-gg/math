@@ -21,7 +21,7 @@ export class Vec3 {
 		return new this()
 	}
 
-	static all<T extends Vec3>(this: Vec3ish<T>, value: number) {
+	static fill<T extends Vec3>(this: Vec3ish<T>, value: number) {
 		return new this(value, value, value)
 	}
 
@@ -95,6 +95,19 @@ export class Vec3 {
 
 	toString() {
 		return `(${this.constructor.name} x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)})`
+	}
+
+	/** mutator */
+	fill(n: number) {
+		this.x = n
+		this.y = n
+		this.z = n
+		return this
+	}
+
+	/** mutator */
+	zero() {
+		return this.fill(0)
 	}
 
 	/** mutator */

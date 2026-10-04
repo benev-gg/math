@@ -11,6 +11,7 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 rename `Vec.all` to `Vec.fill` for Vec2, Vec3, Vec4
 - 🟥 rework splines.
   - 🟥rename `spline.linear` to `splineLinear`
   - 🟥rename `spline.catmull` to `splineCatmull`
@@ -27,6 +28,7 @@
   - `Rect->clone` -> `Rect->dup`
   - `Box->clone` -> `Box->dup`
   - `Segment->clone` -> `Segment->dup`
+- 🍏 add `vec.fill(0)` methods for Vec2, Vec3, Vec4
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
 - 🍏 add fns `average`, `smoothstep`, `smootherstep`
 - 🍏 improve polymorphic typings on Vec2, Vec3, Vec4, Circular, Quat, Mat4

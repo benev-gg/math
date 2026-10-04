@@ -30,7 +30,7 @@ export class Vec2 implements Xy {
 		return new this()
 	}
 
-	static all<T extends Vec2>(this: Vec2ish<T>, value: number) {
+	static fill<T extends Vec2>(this: Vec2ish<T>, value: number) {
 		return new this(value, value)
 	}
 
@@ -99,6 +99,18 @@ export class Vec2 implements Xy {
 
 	toString() {
 		return `(${this.constructor.name} x${this.x.toFixed(2)}, y${this.y.toFixed(2)})`
+	}
+
+	/** mutator */
+	fill(n: number) {
+		this.x = n
+		this.y = n
+		return this
+	}
+
+	/** mutator */
+	zero() {
+		return this.fill(0)
 	}
 
 	/** mutator */

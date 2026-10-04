@@ -20,6 +20,10 @@ export class Vec4 {
 		return new this()
 	}
 
+	static fill<T extends Vec4>(this: Vec4ish<T>, value: number) {
+		return new this(value, value, value, value)
+	}
+
 	static from<T extends Vec4>(this: Vec4ish<T>, v: XyzwArray | Xyzw) {
 		return Array.isArray(v)
 			? new this(...v)
@@ -53,6 +57,21 @@ export class Vec4 {
 		return `(Vec4 x${this.x.toFixed(2)}, y${this.y.toFixed(2)}, z${this.z.toFixed(2)}, w${this.w.toFixed(2)})`
 	}
 
+	/** mutator */
+	fill(n: number) {
+		this.x = n
+		this.y = n
+		this.z = n
+		this.w = n
+		return this
+	}
+
+	/** mutator */
+	zero() {
+		return this.fill(0)
+	}
+
+	/** mutator */
 	set_(x: number, y: number, z: number, w: number) {
 		this.x = x
 		this.y = y
@@ -61,6 +80,7 @@ export class Vec4 {
 		return this
 	}
 
+	/** mutator */
 	set({x, y, z, w}: Xyzw) {
 		this.x = x
 		this.y = y
