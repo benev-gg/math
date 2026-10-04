@@ -99,21 +99,3 @@ export function smootherstep(x: number) {
 	return x * x * x * (x * (x * 6 - 15) + 10)
 }
 
-export function circularNormalize(x: number) {
-	return wrap(x, 0, Math.PI * 2)
-}
-
-export function circularDelta(from: number, to: number) {
-	return Math.atan2(
-		Math.sin(to - from),
-		Math.cos(to - from),
-	)
-}
-
-export function circularApproach(maxDelta: number, from: number, to: number) {
-	const delta = circularDelta(from, to)
-	return (Math.abs(delta) <= maxDelta)
-		? to
-		: from + Math.sign(delta) * maxDelta
-}
-

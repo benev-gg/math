@@ -1,6 +1,4 @@
 
-import {wrap} from "../core/basics.js"
-
 export const pi = Math.PI
 
 /** basic unit for measuring rotations */
@@ -18,11 +16,6 @@ export const radians = {
 
 	toTurns(r: number) {
 		return r / radians.circle
-	},
-
-	circleDistance(radiansA: number, radiansB: number): number {
-		const diff = Math.abs(wrap(radiansA - radiansB, 0, radians.circle))
-		return Math.min(diff, radians.circle - diff)
 	},
 }
 
