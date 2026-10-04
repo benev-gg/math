@@ -1,6 +1,6 @@
 
+export * from "./core/angles.js"
 export * from "./core/basics.js"
-export * from "./core/circular.js"
 export * from "./core/mat4.js"
 export * from "./core/quat.js"
 export * from "./core/tuples.js"
@@ -8,7 +8,6 @@ export * from "./core/vec2.js"
 export * from "./core/vec3.js"
 export * from "./core/vec4.js"
 
-export * from "./tools/angles.js"
 export * from "./tools/crypto-random.js"
 export * from "./tools/noise.js"
 export * from "./tools/spline.js"
