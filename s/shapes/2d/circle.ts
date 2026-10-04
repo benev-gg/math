@@ -37,7 +37,7 @@ export class Circle {
 	}
 
 	boundingBox() {
-		const size = Vec2.all(this.radius * 2)
+		const size = Vec2.fill(this.radius * 2)
 		return Rect.fromCenter(this.center.dup(), size)
 	}
 }
