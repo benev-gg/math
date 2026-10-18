@@ -1,8 +1,8 @@
 
-import {clamp, lerp} from "../core/basics.js"
-import {Vec2, type Xy} from "../core/vec2.js"
-import {Vec3, type Xyz} from "../core/vec3.js"
-import type {XyArray} from "../core/tuples.js"
+import {clamp, lerp} from "./basics.js"
+import {Vec2, type Xy} from "./vec2.js"
+import {Vec3, type Xyz} from "./vec3.js"
+import type {XyArray} from "./tuples.js"
 
 /** input/value pairs, with strictly increasing input coordinates. */
 type Knots = readonly Readonly<XyArray>[]

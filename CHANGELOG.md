@@ -11,6 +11,9 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 reorganize physics fns
+  - 🟥 dissolved `collide2d` namespace, renaming fns to like `collidePointVsRect`
+  - 🟥 dissolved `intersect2d` namespace, renaming fns to like `intersectRectVsRect`
 - 🟥 rework all `circular` fns and `angles`
   - 🟥 `circularNormalize` replaced by `angleNormalize` (etc)
   - 🟥 `circularDifference` replaced by `angleDelta` (etc)

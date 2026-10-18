@@ -1,7 +1,7 @@
 
 import {Vec2, Xy} from "../../core/vec2.js"
 import {XyArray} from "../../core/tuples.js"
-import {pointVsRect} from "../../physics/2d/collide2d.js"
+import {collidePointVsRect} from "../../physics/2d/collide.js"
 
 export type RectJson = [min: XyArray, max: XyArray]
 export type RectLike = {min: Xy, max: Xy}
@@ -69,7 +69,7 @@ export class Rect {
 	}
 
 	contains(point: Vec2) {
-		return pointVsRect(point, this)
+		return collidePointVsRect(point, this)
 	}
 
 	equals(rect: RectLike) {

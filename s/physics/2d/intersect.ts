@@ -2,8 +2,8 @@
 import {Vec2} from "../../core/vec2.js"
 import {clamp} from "../../core/basics.js"
 import {Rect} from "../../shapes/2d/rect.js"
-import {collide2d} from "./collide2d.barrel.js"
 import {Circle} from "../../shapes/2d/circle.js"
+import {collideRectVsCircle, collideRectVsRect} from "./collide.js"
 
 export class Intersection {
 	constructor(
@@ -14,8 +14,8 @@ export class Intersection {
 	) {}
 }
 
-export function rectVsRect(a: Rect, b: Rect) {
-	if (!collide2d.rectVsRect(a, b)) return null
+export function intersectRectVsRect(a: Rect, b: Rect) {
+	if (!collideRectVsRect(a, b)) return null
 
 	const overlapX = Math.min(a.max.x - b.min.x, b.max.x - a.min.x)
 	const overlapY = Math.min(a.max.y - b.min.y, b.max.y - a.min.y)
@@ -37,8 +37,8 @@ export function rectVsRect(a: Rect, b: Rect) {
 	return new Intersection(contactPoint, depth, normalA, normalB)
 }
 
-export function rectVsCircle(rect: Rect, circle: Circle) {
-	if (!collide2d.rectVsCircle(rect, circle)) return null
+export function intersectRectVsCircle(rect: Rect, circle: Circle) {
+	if (!collideRectVsCircle(rect, circle)) return null
 
 	const clamped = new Vec2(
 		clamp(circle.center.x, rect.min.x, rect.max.x),
@@ -55,7 +55,7 @@ export function rectVsCircle(rect: Rect, circle: Circle) {
 	return new Intersection(contactPoint, depth, normalA, normalB)
 }
 
-export function circleVsCircle(a: Circle, b: Circle) {
+export function intersectCircleVsCircle(a: Circle, b: Circle) {
 	const dx = b.center.x - a.center.x
 	const dy = b.center.y - a.center.y
 	const distance = Math.sqrt(dx ** 2 + dy ** 2)

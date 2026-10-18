@@ -2,7 +2,7 @@
 import {guarantee} from "@e280/stz"
 import {Vec2} from "../core/vec2.js"
 import {Rect} from "../shapes/2d/rect.js"
-import {rectVsRect} from "../physics/2d/collide2d.js"
+import {collideRectVsRect} from "../physics/2d/collide.js"
 
 export class Zen<X> {
 	zones = new Set<ZenZone<X>>()
@@ -87,7 +87,7 @@ export class ZenGrid<X> {
 
 		for (const zone of zones)
 			for (const zen of zone.zens)
-				if (rectVsRect(rect, zen.rect))
+				if (collideRectVsRect(rect, zen.rect))
 					return true
 
 		return false
@@ -100,7 +100,7 @@ export class ZenGrid<X> {
 
 		for (const zone of zones)
 			for (const zen of zone.zens)
-				if (!selected.has(zen) && rectVsRect(rect, zen.rect))
+				if (!selected.has(zen) && collideRectVsRect(rect, zen.rect))
 					selected.add(zen)
 
 		return selected
