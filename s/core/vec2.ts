@@ -90,9 +90,6 @@ export class Vec2 implements Xy {
 		return [this.x, this.y]
 	}
 
-	/** @deprecated renamed to `array` */
-	tuple() { return this.array() }
-
 	toJSON(): XyArray {
 		return this.array()
 	}

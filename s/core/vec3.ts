@@ -86,9 +86,6 @@ export class Vec3 {
 		return [this.x, this.y, this.z]
 	}
 
-	/** @deprecated renamed to `array` */
-	tuple() { return this.array() }
-
 	toJSON(): XyzArray {
 		return this.array()
 	}

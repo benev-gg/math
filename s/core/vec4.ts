@@ -46,9 +46,6 @@ export class Vec4 {
 		return [x, y, z, w]
 	}
 
-	/** @deprecated renamed to `array` */
-	tuple() { return this.array() }
-
 	toJSON(): XyzwArray {
 		return this.array()
 	}

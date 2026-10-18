@@ -1,6 +1,6 @@
 
-import {Mat4Array} from "./tuples.js"
 import {Quat, Xyzw} from "./quat.js"
+import {Mat4Array} from "./tuples.js"
 import {Vec3, type Xyz} from "./vec3.js"
 
 export function compose(
@@ -106,9 +106,6 @@ export class Mat4 {
 	array() {
 		return [...this.buffer] as Mat4Array
 	}
-
-	/** @deprecated renamed to `array` */
-	tuple() { return this.array() }
 
 	toJSON() {
 		return this.array()
