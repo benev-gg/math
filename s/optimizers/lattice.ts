@@ -2,7 +2,7 @@
 import {guarantee, need} from "@e280/stz"
 import {Vec2, Xy} from "../core/vec2.js"
 import {Rect, RectLike} from "../shapes/2d/rect.js"
-import {collide2d} from "../physics/2d/collide2d.barrel.js"
+import {collideRectVsRect} from "../physics/2d/collide.js"
 
 export class Lattice<X> {
 	#cellsByHash = new Map<string, Cell<X>>()
@@ -60,7 +60,7 @@ export class Lattice<X> {
 				seen.add(item)
 
 				const membership = need(this.#memberships, item)
-				if (collide2d.rectVsRect(membership.rect, rect))
+				if (collideRectVsRect(membership.rect, rect))
 					yield item
 			}
 		}
