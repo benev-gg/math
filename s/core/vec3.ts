@@ -489,7 +489,7 @@ export class Vec3 {
 
 	/** mutator */
 	rotateAroundAxis(angle: number, {x, y, z}: Xyz) {
-		return this.rotateAroundAxis_(x, y, z, angle)
+		return this.rotateAroundAxis_(angle, x, y, z)
 	}
 }
 
