@@ -11,6 +11,7 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 revise `HashSet` -> `add` method -- now only accepts one value param, performs deduping and returns the canonical value.
 - 🟥 reorganize physics fns
   - 🟥 dissolved `collide2d` namespace, renaming fns to like `collidePointVsRect`
   - 🟥 dissolved `intersect2d` namespace, renaming fns to like `intersectRectVsRect`

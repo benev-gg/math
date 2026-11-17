@@ -6,7 +6,8 @@ export class HashSet<Value> {
 			private hash: (value: Value) => string,
 			values: Value[] = [],
 		) {
-		this.add(...values)
+		for (const value of values)
+			this.add(value)
 	}
 
 	get size() {
@@ -21,12 +22,14 @@ export class HashSet<Value> {
 		return this.#map.has(this.hash(value))
 	}
 
-	add(...values: Value[]) {
-		for (const value of values) {
-			const key = this.hash(value)
+	add(value: Value) {
+		const key = this.hash(value)
+		if (this.#map.has(key))
+			return this.#map.get(key)!
+		else {
 			this.#map.set(key, value)
+			return value
 		}
-		return this
 	}
 
 	delete(...values: Value[]) {
