@@ -1,9 +1,8 @@
 
 import {Vec2, Xy} from "../../core/vec2.js"
-import {XyArray} from "../../core/tuples.js"
 import {collidePointVsRect} from "../../physics/2d/collide.js"
 
-export type RectJson = [min: XyArray, max: XyArray]
+export type RectArray = [minX: number, minY: number, maxX: number, maxY: number]
 export type RectLike = {min: Xy, max: Xy}
 
 export class Rect {
@@ -12,9 +11,9 @@ export class Rect {
 		public max: Vec2,
 	) {}
 
-	static from(data: RectJson | RectLike) {
+	static from(data: RectArray | RectLike) {
 		return Array.isArray(data)
-			? new this(Vec2.from(data[0]), Vec2.from(data[1]))
+			? new this(new Vec2(data[0], data[1]), new Vec2(data[2], data[3]))
 			: new this(Vec2.from(data.min), Vec2.from(data.max))
 	}
 
@@ -38,8 +37,12 @@ export class Rect {
 		return new Rect(this.min.dup(), this.max.dup())
 	}
 
-	toJSON(): RectJson {
-		return [this.min.toJSON(), this.max.toJSON()]
+	array(): RectArray {
+		return [...this.min.array(), ...this.max.array()]
+	}
+
+	toJSON(): RectLike {
+		return {min: this.min.toJSON(), max: this.max.toJSON()}
 	}
 
 	set(rect: RectLike) {

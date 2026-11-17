@@ -1,6 +1,6 @@
 
 import {clamp} from "./basics.js"
-import {XyArray} from "./tuples.js"
+import {XyArray} from "./types.js"
 
 export type Xy = {x: number, y: number}
 
@@ -90,8 +90,8 @@ export class Vec2 implements Xy {
 		return [this.x, this.y]
 	}
 
-	toJSON(): XyArray {
-		return this.array()
+	toJSON(): Xy {
+		return {x: this.x, y: this.y}
 	}
 
 	toString() {

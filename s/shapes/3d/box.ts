@@ -1,8 +1,8 @@
 
-import {XyzArray} from "../../core/tuples.js"
+import {XyzArray} from "../../core/types.js"
 import {Vec3, Xyz} from "../../core/vec3.js"
 
-export type BoxJson = [min: XyzArray, max: XyzArray]
+export type BoxArray = [...XyzArray, ...XyzArray]
 export type BoxLike = {min: Xyz, max: Xyz}
 
 export class Box {
@@ -11,10 +11,10 @@ export class Box {
 		public max: Vec3,
 	) {}
 
-	static from(data: BoxJson | BoxLike) {
-		return Array.isArray(data)
-			? new this(Vec3.from(data[0]), Vec3.from(data[1]))
-			: new this(Vec3.from(data.min), Vec3.from(data.max))
+	static from(d: BoxArray | BoxLike) {
+		return Array.isArray(d)
+			? new this(new Vec3(d[0], d[1], d[2]), new Vec3(d[3], d[4], d[5]))
+			: new this(Vec3.from(d.min), Vec3.from(d.max))
 	}
 
 	static fromCorner(min: Vec3, size: Vec3) {
@@ -28,8 +28,12 @@ export class Box {
 		return new this(min, max)
 	}
 
-	toJSON(): BoxJson {
-		return [this.min.toJSON(), this.max.toJSON()]
+	array(): BoxArray {
+		return [...this.min.array(), ...this.max.array()]
+	}
+
+	toJSON(): BoxLike {
+		return {min: this.min.toJSON(), max: this.max.toJSON()}
 	}
 
 	dup() {

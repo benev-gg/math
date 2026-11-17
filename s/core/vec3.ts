@@ -1,5 +1,5 @@
 
-import {XyzArray} from "./tuples.js"
+import {XyzArray} from "./types.js"
 import {clamp, lerp} from "./basics.js"
 
 export type Xyz = {x: number, y: number, z: number}
@@ -86,8 +86,8 @@ export class Vec3 {
 		return [this.x, this.y, this.z]
 	}
 
-	toJSON(): XyzArray {
-		return this.array()
+	toJSON(): Xyz {
+		return {x: this.x, y: this.y, z: this.z}
 	}
 
 	toString() {

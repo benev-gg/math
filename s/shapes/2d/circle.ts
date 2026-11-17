@@ -1,9 +1,9 @@
 
 import {Rect} from "./rect.js"
 import {Vec2, Xy} from "../../core/vec2.js"
-import {XyArray} from "../../core/tuples.js"
+import {XyArray} from "../../core/types.js"
 
-export type CircleJson = [center: XyArray, radius: number]
+export type CircleArray = [...XyArray, radius: number]
 export type CircleLike = {center: Xy, radius: number}
 
 export class Circle {
@@ -12,14 +12,18 @@ export class Circle {
 		public radius: number,
 	) {}
 
-	static from(data: CircleJson | CircleLike) {
+	static from(data: CircleArray | CircleLike) {
 		return Array.isArray(data)
-			? new this(Vec2.from(data[0]), data[1])
+			? new this(new Vec2(data[0], data[1]), data[2])
 			: new this(Vec2.from(data.center), data.radius)
 	}
 
-	toJSON(): CircleJson {
-		return [this.center.dup().toJSON(), this.radius]
+	array(): CircleArray {
+		return [...this.center.array(), this.radius]
+	}
+
+	toJSON(): CircleLike {
+		return {center: this.center.toJSON(), radius: this.radius}
 	}
 
 	dup() {

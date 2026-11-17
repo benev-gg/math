@@ -1,6 +1,6 @@
 
 import {Quat, Xyzw} from "./quat.js"
-import {Mat4Array} from "./tuples.js"
+import {Mat4Array} from "./types.js"
 import {Vec3, type Xyz} from "./vec3.js"
 
 export function compose(

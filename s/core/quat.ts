@@ -1,6 +1,6 @@
 
 import {Xyz} from "./vec3.js"
-import {XyzwArray} from "./tuples.js"
+import {XyzwArray} from "./types.js"
 
 export type Xyzw = {x: number, y: number, z: number, w: number}
 
@@ -37,8 +37,9 @@ export class Quat {
 		return [x, y, z, w]
 	}
 
-	toJSON(): XyzwArray {
-		return this.array()
+	toJSON(): Xyzw {
+		const {x, y, z, w} = this
+		return {x, y, z, w}
 	}
 
 	*[Symbol.iterator]() {
@@ -53,7 +54,7 @@ export class Quat {
 	}
 
 	dup() {
-		return new (this.constructor as any)(...this.toJSON()) as typeof this
+		return new (this.constructor as any)(...this.array()) as typeof this
 	}
 
 	lengthSquared() {

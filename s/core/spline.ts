@@ -2,7 +2,7 @@
 import {clamp, lerp} from "./basics.js"
 import {Vec2, type Xy} from "./vec2.js"
 import {Vec3, type Xyz} from "./vec3.js"
-import type {XyArray} from "./tuples.js"
+import type {XyArray} from "./types.js"
 
 /** input/value pairs, with strictly increasing input coordinates. */
 type Knots = readonly Readonly<XyArray>[]
