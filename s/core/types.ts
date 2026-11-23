@@ -1,5 +1,5 @@
 
-import {Vec2} from "./vec2.js"
+import type {Vec2} from "./vec2.js"
 
 export type XyArray = [x: number, y: number]
 export type XyzArray = [x: number, y: number, z: number]

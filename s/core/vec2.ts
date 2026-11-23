@@ -1,6 +1,6 @@
 
 import {clamp} from "./basics.js"
-import {Cardinals, Intercardinals, Xy, XyArray} from "./types.js"
+import type {Cardinals, Intercardinals, Xy, XyArray} from "./types.js"
 
 type Vec2ish<T extends Vec2> = new(x?: number, y?: number) => T
 
