@@ -11,6 +11,8 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 replace `index2d` with `Vec2 -> index(xy)`.
+- 🟥 replace `unindex` with `Vec2 -> unindex(index)`.
 - 🟥 universally rework `.array()` to return flat arrays and `.toJSON()` to return js objects.
 - 🟥 revise `HashSet` -> `add` method -- now only accepts one value param, performs deduping and returns the canonical value.
 - 🟥 reorganize physics fns
@@ -42,6 +44,7 @@
 - 🍏 add fns `average`, `smoothstep`, `smootherstep`
 - 🍏 improve polymorphic typings on Vec2, Vec3, Vec4, Circular, Quat, Mat4
 - 🍏 add fns `stronger` and `weaker`
+- 🍏 add `vec2.loop()` generator, and `vec2.loop_(fn)` callback performance variant.
 
 
 
