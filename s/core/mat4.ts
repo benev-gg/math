@@ -1,7 +1,7 @@
 
-import {Quat, Xyzw} from "./quat.js"
-import {Mat4Array} from "./types.js"
+import {Quat} from "./quat.js"
 import {Vec3, type Xyz} from "./vec3.js"
+import {Mat4Array, Xyzw} from "./types.js"
 
 export function compose(
 		buffer: Float32Array | Mat4Array,

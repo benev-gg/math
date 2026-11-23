@@ -1,5 +1,6 @@
 
-import {Vec2, Xy} from "../../core/vec2.js"
+import {Xy} from "../../core/types.js"
+import {Vec2} from "../../core/vec2.js"
 import {collidePointVsRect} from "../../physics/2d/collide.js"
 
 export type RectArray = [minX: number, minY: number, maxX: number, maxY: number]

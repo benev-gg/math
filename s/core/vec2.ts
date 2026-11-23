@@ -1,8 +1,6 @@
 
 import {clamp} from "./basics.js"
-import {Cardinals, Intercardinals, XyArray} from "./types.js"
-
-export type Xy = {x: number, y: number}
+import {Cardinals, Intercardinals, Xy, XyArray} from "./types.js"
 
 /** @deprecated moved to `Vec2.index({x, y})` and `Vec2.index_(x, y)`. */
 export const index2d = (extent: Xy, vec: Xy) => {

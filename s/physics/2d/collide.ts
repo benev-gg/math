@@ -1,6 +1,7 @@
 
+import {Xy} from "../../core/types.js"
+import {Vec2} from "../../core/vec2.js"
 import {clamp} from "../../core/basics.js"
-import {Vec2, Xy} from "../../core/vec2.js"
 import {RectLike} from "../../shapes/2d/rect.js"
 import {CircleLike} from "../../shapes/2d/circle.js"
 

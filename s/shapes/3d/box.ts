@@ -1,6 +1,6 @@
 
-import {XyzArray} from "../../core/types.js"
-import {Vec3, Xyz} from "../../core/vec3.js"
+import {Vec3} from "../../core/vec3.js"
+import {Xyz, XyzArray} from "../../core/types.js"
 
 export type BoxArray = [...XyzArray, ...XyzArray]
 export type BoxLike = {min: Xyz, max: Xyz}

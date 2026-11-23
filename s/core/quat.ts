@@ -1,8 +1,5 @@
 
-import {Xyz} from "./vec3.js"
-import {XyzwArray} from "./types.js"
-
-export type Xyzw = {x: number, y: number, z: number, w: number}
+import {Xyz, Xyzw, XyzwArray} from "./types.js"
 
 type Quatish<T extends Quat> = new(x?: number, y?: number, z?: number, w?: number) => T
 

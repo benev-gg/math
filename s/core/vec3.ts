@@ -1,8 +1,6 @@
 
-import {XyzArray} from "./types.js"
 import {clamp, lerp} from "./basics.js"
-
-export type Xyz = {x: number, y: number, z: number}
+import {Xyz, XyzArray} from "./types.js"
 
 type Vec3ish<T extends Vec3> = new(x?: number, y?: number, z?: number) => T
 
@@ -493,3 +491,4 @@ export class Vec3 {
 	}
 }
 
+export { Xyz }

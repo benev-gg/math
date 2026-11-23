@@ -1,6 +1,5 @@
 
-import {Xyzw} from "./quat.js"
-import {XyzwArray} from "./types.js"
+import {Xyzw, XyzwArray} from "./types.js"
 
 type Vec4ish<T extends Vec4> = new(x?: number, y?: number, z?: number, w?: number) => T
 

@@ -1,7 +1,7 @@
 
 import {Rect} from "./rect.js"
-import {Vec2, Xy} from "../../core/vec2.js"
-import {XyArray} from "../../core/types.js"
+import {Vec2} from "../../core/vec2.js"
+import {Xy, XyArray} from "../../core/types.js"
 
 export type CircleArray = [...XyArray, radius: number]
 export type CircleLike = {center: Xy, radius: number}

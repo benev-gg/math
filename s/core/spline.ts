@@ -1,8 +1,8 @@
 
+import {Vec2} from "./vec2.js"
+import {Vec3} from "./vec3.js"
 import {clamp, lerp} from "./basics.js"
-import {Vec2, type Xy} from "./vec2.js"
-import {Vec3, type Xyz} from "./vec3.js"
-import type {XyArray} from "./types.js"
+import type {XyArray, Xy, Xyz} from "./types.js"
 
 /** input/value pairs, with strictly increasing input coordinates. */
 type Knots = readonly Readonly<XyArray>[]

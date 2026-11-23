@@ -1,6 +1,7 @@
 
 import {guarantee, need} from "@e280/stz"
-import {Vec2, Xy} from "../core/vec2.js"
+import {Xy} from "../core/types.js"
+import {Vec2} from "../core/vec2.js"
 import {Rect, RectLike} from "../shapes/2d/rect.js"
 import {collideRectVsRect} from "../physics/2d/collide.js"
 
