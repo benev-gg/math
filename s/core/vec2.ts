@@ -433,7 +433,7 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	lerp_(x: number, y: number, fraction: number) {
+	lerp_(fraction: number, x: number, y: number) {
 		this.x += (x - this.x) * fraction
 		this.y += (y - this.y) * fraction
 		return this
