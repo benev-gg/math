@@ -65,7 +65,7 @@ export class Vec2 implements Xy {
 		)
 	}
 
-	static cardinals<T extends Vec2>(this: Vec2ish<T>): Cardinals {
+	static cardinals<T extends Vec2>(this: Vec2ish<T>): Cardinals<T> {
 		return [
 			new this(0, 1),
 			new this(1, 0),
@@ -74,7 +74,7 @@ export class Vec2 implements Xy {
 		]
 	}
 
-	static intercardinals<T extends Vec2>(this: Vec2ish<T>): Intercardinals {
+	static intercardinals<T extends Vec2>(this: Vec2ish<T>): Intercardinals<T> {
 		return [
 			new this(1, 1),
 			new this(1, -1),

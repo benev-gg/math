@@ -16,17 +16,17 @@ export type Mat4Array = [
 	number, number, number, number,
 ]
 
-export type Cardinals = [
-	north: Vec2,
-	east: Vec2,
-	south: Vec2,
-	west: Vec2,
+export type Cardinals<T extends Vec2 = Vec2> = [
+	north: T,
+	east: T,
+	south: T,
+	west: T,
 ]
 
-export type Intercardinals = [
-	northEast: Vec2,
-	southEast: Vec2,
-	southWest: Vec2,
-	northWest: Vec2,
+export type Intercardinals<T extends Vec2 = Vec2> = [
+	northEast: T,
+	southEast: T,
+	southWest: T,
+	northWest: T,
 ]
 
