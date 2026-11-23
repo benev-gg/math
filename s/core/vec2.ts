@@ -145,6 +145,19 @@ export class Vec2 implements Xy {
 		return this
 	}
 
+	*loop() {
+		for (let y = 0; y < this.y; y++)
+			for (let x = 0; x < this.x; x++)
+				yield new (this.constructor as any)(x, y) as typeof this
+	}
+
+	loop_(fn: (x: number, y: number, index: number) => void) {
+		let index = 0
+		for (let y = 0; y < this.y; y++)
+			for (let x = 0; x < this.x; x++)
+				fn(x, y, index++)
+	}
+
 	index_(x: number, y: number) {
 		return (y * this.x) + x
 	}
