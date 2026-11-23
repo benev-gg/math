@@ -76,10 +76,10 @@ export class Vec2 implements Xy {
 
 	static intercardinals<T extends Vec2>(this: Vec2ish<T>): Intercardinals {
 		return [
-			new Vec2(1, 1),
-			new Vec2(1, 0),
-			new Vec2(0, -1),
-			new Vec2(-1, 0),
+			new this(1, 1),
+			new this(1, -1),
+			new this(-1, -1),
+			new this(-1, 1),
 		]
 	}
 
