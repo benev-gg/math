@@ -1,15 +1,15 @@
 
 import {clamp} from "./basics.js"
-import {XyArray} from "./types.js"
+import {Cardinals, Intercardinals, XyArray} from "./types.js"
 
 export type Xy = {x: number, y: number}
-export type Cardinals = [north: Vec2, east: Vec2, south: Vec2, west: Vec2]
-export type Intercardinals = [northEast: Vec2, southEast: Vec2, southWest: Vec2, northWest: Vec2]
 
+/** @deprecated moved to `Vec2.index({x, y})` and `Vec2.index_(x, y)`. */
 export const index2d = (extent: Xy, vec: Xy) => {
 	return (vec.y * extent.x) + vec.x
 }
 
+/** @deprecated moved to `Vec2.unindex(index)`. */
 export const unindex2d = (extent: Xy, index: number) => {
 	const x = index % extent.x
 	const y = Math.floor(index / extent.x)
@@ -79,16 +79,16 @@ export class Vec2 implements Xy {
 		)
 	}
 
-	static cardinals(): Cardinals {
+	static cardinals<T extends Vec2>(this: Vec2ish<T>): Cardinals {
 		return [
-			new Vec2(0, 1),
-			new Vec2(1, 0),
-			new Vec2(0, -1),
-			new Vec2(-1, 0),
+			new this(0, 1),
+			new this(1, 0),
+			new this(0, -1),
+			new this(-1, 0),
 		]
 	}
 
-	static intercardinals(): Intercardinals {
+	static intercardinals<T extends Vec2>(this: Vec2ish<T>): Intercardinals {
 		return [
 			new Vec2(1, 1),
 			new Vec2(1, 0),
@@ -157,6 +157,20 @@ export class Vec2 implements Xy {
 			this.y = y
 		}
 		return this
+	}
+
+	index_(x: number, y: number) {
+		return (y * this.x) + x
+	}
+
+	index({x, y}: Xy) {
+		return this.index_(x, y)
+	}
+
+	unindex(index: number) {
+		const x = index % this.x
+		const y = Math.floor(index / this.x)
+		return new (this.constructor as any)(x, y) as typeof this
 	}
 
 	magnitudeSquared() {
