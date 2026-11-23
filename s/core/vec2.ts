@@ -2,18 +2,6 @@
 import {clamp} from "./basics.js"
 import {Cardinals, Intercardinals, Xy, XyArray} from "./types.js"
 
-/** @deprecated moved to `Vec2.index({x, y})` and `Vec2.index_(x, y)`. */
-export const index2d = (extent: Xy, vec: Xy) => {
-	return (vec.y * extent.x) + vec.x
-}
-
-/** @deprecated moved to `Vec2.unindex(index)`. */
-export const unindex2d = (extent: Xy, index: number) => {
-	const x = index % extent.x
-	const y = Math.floor(index / extent.x)
-	return new Vec2(x, y)
-}
-
 type Vec2ish<T extends Vec2> = new(x?: number, y?: number) => T
 
 export class Vec2 implements Xy {
