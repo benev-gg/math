@@ -3,6 +3,8 @@ import {clamp} from "./basics.js"
 import {XyArray} from "./types.js"
 
 export type Xy = {x: number, y: number}
+export type Cardinals = [north: Vec2, east: Vec2, south: Vec2, west: Vec2]
+export type Intercardinals = [northEast: Vec2, southEast: Vec2, southWest: Vec2, northWest: Vec2]
 
 export const index2d = (extent: Xy, vec: Xy) => {
 	return (vec.y * extent.x) + vec.x
@@ -75,6 +77,24 @@ export class Vec2 implements Xy {
 			Math.cos(radians),
 			Math.sin(radians),
 		)
+	}
+
+	static cardinals(): Cardinals {
+		return [
+			new Vec2(0, 1),
+			new Vec2(1, 0),
+			new Vec2(0, -1),
+			new Vec2(-1, 0),
+		]
+	}
+
+	static intercardinals(): Intercardinals {
+		return [
+			new Vec2(1, 1),
+			new Vec2(1, 0),
+			new Vec2(0, -1),
+			new Vec2(-1, 0),
+		]
 	}
 
 	dup() {
