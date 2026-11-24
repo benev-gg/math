@@ -1,5 +1,5 @@
 
-import {clamp} from "./basics.js"
+import {clamp, lerp} from "./basics.js"
 import type {Cardinals, Intercardinals, Xy, XyArray} from "./types.js"
 
 type Vec2ish<T extends Vec2> = new(x?: number, y?: number) => T
@@ -433,15 +433,15 @@ export class Vec2 implements Xy {
 	}
 
 	/** mutator */
-	lerp_(fraction: number, x: number, y: number) {
-		this.x += (x - this.x) * fraction
-		this.y += (y - this.y) * fraction
+	lerp_(fraction: number, x: number, y: number, maxDelta?: number) {
+		this.x = lerp(fraction, this.x, x, maxDelta)
+		this.y = lerp(fraction, this.y, y, maxDelta)
 		return this
 	}
 
 	/** mutator */
-	lerp(fraction: number, {x, y}: Xy) {
-		return this.lerp_(fraction, x, y)
+	lerp(fraction: number, {x, y}: Xy, maxDelta?: number) {
+		return this.lerp_(fraction, x, y, maxDelta)
 	}
 
 	/** mutator */

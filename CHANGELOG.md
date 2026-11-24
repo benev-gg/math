@@ -11,6 +11,7 @@
 ## v0.4
 
 ### v0.4.0
+- 🟥 fix argument ordering for Vec2 and Vec3 `lerp` methods.
 - 🟥 replace `index2d` with `Vec2 -> index(xy)`.
 - 🟥 replace `unindex` with `Vec2 -> unindex(index)`.
 - 🟥 universally rework `.array()` to return flat arrays and `.toJSON()` to return js objects.

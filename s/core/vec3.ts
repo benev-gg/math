@@ -440,7 +440,7 @@ export class Vec3 {
 	}
 
 	/** mutator */
-	lerp({x, y, z}: Xyz, fraction: number, maxDelta?: number) {
+	lerp(fraction: number, {x, y, z}: Xyz, maxDelta?: number) {
 		return this.lerp_(fraction, x, y, z, maxDelta)
 	}
 
