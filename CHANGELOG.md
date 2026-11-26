@@ -40,6 +40,7 @@
   - `Rect->clone` -> `Rect->dup`
   - `Box->clone` -> `Box->dup`
   - `Segment->clone` -> `Segment->dup`
+- 🍏 add `catmull` fn.
 - 🍏 add `vec.fill(0)` methods for Vec2, Vec3, Vec4
 - 🍏 add basic fns like `clamp`, `wrap`, `lerp`, etc
 - 🍏 add fns `average`, `smoothstep`, `smootherstep`
