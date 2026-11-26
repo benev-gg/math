@@ -129,6 +129,17 @@ export function splineCatmull(x: number, points: Knots) {
 	return hermite(fraction, y0, y1, startTangent, endTangent)
 }
 
+/** cubic interpolation. */
+export function catmull(
+		fraction: number,
+		a: number,
+		b: number,
+		c: number,
+		d: number,
+	) {
+	return catmullSegment(fraction, b, c, a, d)
+}
+
 /** evaluate one uniform catmull-rom segment; missing neighbors use the segment's slope. */
 function catmullSegment(
 		fraction: number,
